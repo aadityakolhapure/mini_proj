@@ -20,6 +20,7 @@ if (isset($_POST['add_staff'])) {
 	$caste = $_POST['caste'];
 	$subcaste = $_POST['subcaste'];
 	$ssc = $_POST['ssc'];
+	$diploma = $_POST['diploma'];
 	$hsc = $_POST['hsc'];
 	$be = $_POST['be'];
 	$pg = $_POST['pg'];
@@ -28,7 +29,7 @@ if (isset($_POST['add_staff'])) {
 	$journal = $_POST['journal'];
 	$patent = $_POST['patent'];
 
-	$result = mysqli_query($conn, "update tblemployees set FirstName='$fname', LastName='$lname', EmailId='$email', Gender='$gender', Dob='$dob', Department='$department', Address='$address', Av_leave='$leave_days', role='$user_role', Phonenumber='$phonenumber', emp_id = '$emp', aadhar = '$aadhar', pan = '$pan', caste = '$caste', subcaste = '$subcaste', ssc = '$ssc', hsc = '$hsc', be = '$be', pg = '$pg', phd = '$phd', publication = '$publication', journal = '$journal', patent = '$patent' where emp_id='$get_id'         
+	$result = mysqli_query($conn, "update tblemployees set FirstName='$fname', LastName='$lname', EmailId='$email', Gender='$gender', Dob='$dob', Department='$department', Address='$address', Av_leave='$leave_days', role='$user_role', Phonenumber='$phonenumber', emp_id = '$emp', aadhar = '$aadhar', pan = '$pan', caste = '$caste', subcaste = '$subcaste', ssc = '$ssc', diploma = '$diploma', hsc = '$hsc', be = '$be', pg = '$pg', phd = '$phd', publication = '$publication', journal = '$journal', patent = '$patent' where emp_id='$get_id'         
 		");
 	if ($result) {
 		echo "<script>alert('Record Successfully Updated');</script>";
@@ -267,6 +268,13 @@ if (isset($_POST['add_staff'])) {
 										<div class="form-group">
 											<label>SSC marks :</label>
 											<input name="ssc" type="text" class="form-control" required="true" autocomplete="off" value="<?php echo $new_row['ssc']; ?>">
+										</div>
+									</div>
+
+									<div class="col-md-4 col-sm-12">
+										<div class="form-group">
+											<label>Diploma marks :</label>
+											<input name="diploma" type="text" class="form-control" required="true" autocomplete="off" value="<?php echo $new_row['diploma']; ?>">
 										</div>
 									</div>
 

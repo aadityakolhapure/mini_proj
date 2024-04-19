@@ -1,4 +1,4 @@
-<?php include('includes/header.php') ?>
+<?php include('includes_hod/header.php') ?>
 <?php include('../includes/session.php') ?>
 <?php $get_id = $_GET['edit']; ?>
 <?php
@@ -55,11 +55,11 @@ if (isset($_POST['add_staff'])) {
 		</div>
 	</div>
 
-	<?php include('includes/navbar.php') ?>
+	<?php include('includes_hod/navbar.php') ?>
 
-	<?php include('includes/right_sidebar.php') ?>
+	<?php include('includes_hod/right_sidebar.php') ?>
 
-	<?php include('includes/left_sidebar.php') ?>
+	<?php include('includes_hod/left_sidebar.php') ?>
 
 	<div class="mobile-menu-overlay"></div>
 
@@ -72,11 +72,11 @@ if (isset($_POST['add_staff'])) {
 					<div class="row">
 						<div class="col-md-6 col-sm-12">
 							<div class="title">
-								<h4>Principal Portal</h4>
+								<h4>FACULTY Portal</h4>
 							</div>
 							<nav aria-label="breadcrumb" role="navigation">
 								<ol class="breadcrumb">
-									<li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
+									<li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
 									<li class="breadcrumb-item active" aria-current="page">Faculty Edit</li>
 								</ol>
 							</nav>
@@ -109,19 +109,19 @@ if (isset($_POST['add_staff'])) {
 									<div class="col-md-4 col-sm-12">
 										<div class="form-group">
 											<label>First Name :</label>
-											<span name="firstname" class="form-control wizard-required" required="true" autocomplete="off" value=""><?php echo $row['FirstName']; ?></span>
+											<input name="firstname" type="text" class="form-control wizard-required" required="true" autocomplete="off" value="<?php echo $row['FirstName']; ?>">
 										</div>
 									</div>
 									<div class="col-md-4 col-sm-12">
 										<div class="form-group">
 											<label>Last Name :</label>
-											<span name="lastname" class="form-control" required="true" autocomplete="off" value=""><?php echo $row['LastName']; ?></span>
+											<input name="lastname" type="text" class="form-control" required="true" autocomplete="off" value="<?php echo $row['LastName']; ?>">
 										</div>
 									</div>
 									<div class="col-md-4 col-sm-12">
 										<div class="form-group">
 											<label>Email Address :</label>
-											<span name="email" class="form-control" required="true" autocomplete="off" value=""><?php echo $row['EmailId']; ?></span>
+											<input name="email" type="email" class="form-control" required="true" autocomplete="off" value="<?php echo $row['EmailId']; ?>">
 										</div>
 									</div>
 								</div>
@@ -135,13 +135,17 @@ if (isset($_POST['add_staff'])) {
 									<div class="col-md-4 col-sm-12">
 										<div class="form-group">
 											<label>Gender :</label>
-											<span name="phonenumber" class="form-control" required="true" autocomplete="off"><?php echo $row['Gender']; ?></span>
+											<select name="gender" class="custom-select form-control" required="true" autocomplete="off">
+												<option value="<?php echo $row['Gender']; ?>"><?php echo $row['Gender']; ?></option>
+												<option value="male">Male</option>
+												<option value="female">Female</option>
+											</select>
 										</div>
 									</div>
 									<div class="col-md-4 col-sm-12">
 										<div class="form-group">
 											<label>Phone Number :</label>
-											<span name="phonenumber" class="form-control" required="true" autocomplete="off"><?php echo $row['Phonenumber']; ?></span>
+											<input name="phonenumber" type="text" class="form-control" required="true" autocomplete="off" value="<?php echo $row['Phonenumber']; ?>">
 										</div>
 									</div>
 								</div>
@@ -149,22 +153,33 @@ if (isset($_POST['add_staff'])) {
 									<div class="col-md-4 col-sm-12">
 										<div class="form-group">
 											<label>Date Of Birth :</label>
-											<span name="dob" class="form-control" required="true" autocomplete="off" ><?php echo $row['Dob']; ?></span>
+											<input name="dob" type="text" class="form-control date-picker" required="true" autocomplete="off" value="<?php echo $row['Dob']; ?>">
 										</div>
 									</div>
 									<div class="col-md-4 col-sm-12">
 										<div class="form-group">
 											<label>Address :</label>
-											<span name="address" class="form-control" required="true" autocomplete="off" ><?php echo $row['Address']; ?></span>
+											<input name="address" type="text" class="form-control" required="true" autocomplete="off" value="<?php echo $row['Address']; ?>">
 										</div>
 									</div>
 									<div class="col-md-4 col-sm-12">
 										<div class="form-group">
 											<label>Department :</label>
-											<span name="department" class="custom-select form-control" required="true" autocomplete="off">
-											<?php echo $row['Department']; ?>
-												
-											</span>
+											<select name="department" class="custom-select form-control" required="true" autocomplete="off">
+												<?php
+												$query_staff = mysqli_query($conn, "select * from tblemployees join  tbldepartments where emp_id = '$get_id'") or die(mysqli_error());
+												$row_staff = mysqli_fetch_array($query_staff);
+
+												?>
+												<option value="<?php echo $row_staff['DepartmentShortName']; ?>"><?php echo $row_staff['DepartmentName']; ?></option>
+												<?php
+												$query = mysqli_query($conn, "select * from tbldepartments");
+												while ($row = mysqli_fetch_array($query)) {
+
+												?>
+													<option value="<?php echo $row['DepartmentShortName']; ?>"><?php echo $row['DepartmentName']; ?></option>
+												<?php } ?>
+											</select>
 										</div>
 									</div>
 								</div>
@@ -177,24 +192,26 @@ if (isset($_POST['add_staff'])) {
 									<div class="col-md-4 col-sm-12">
 										<div class="form-group">
 											<label>Faculty Leave Days :</label>
-											<span name="leave_days" type="text" class="form-control" required="true" autocomplete="off"><?php echo $new_row['Av_leave']; ?></span>
+											<input name="leave_days" type="text" class="form-control" required="true" autocomplete="off" value="<?php echo $new_row['Av_leave']; ?>">
 										</div>
 									</div>
 
 									<div class="col-md-4 col-sm-12">
 										<div class="form-group">
 											<label>User Role :</label>
-											<span name="user_role" class="custom-select form-control" required="true" autocomplete="off">
-												<?php echo $new_row['role']; ?>
-												
-											</span>
+											<select name="user_role" class="custom-select form-control" required="true" autocomplete="off">
+												<option value="<?php echo $new_row['role']; ?>"><?php echo $new_row['role']; ?></option>
+												<option value="Admin">Admin</option>
+												<option value="HOD">HOD</option>
+												<option value="Staff">Faculty</option>
+											</select>
 										</div>
 									</div>
 
 									<div class="col-md-4 col-sm-12">
 										<div class="form-group">
 											<label>Employment ID :</label>
-											<span name="emp_id" type="text" class="form-control" required="true" autocomplete="off" ><?php echo $new_row['emp']; ?></span>
+											<input name="emp_id" type="text" class="form-control" required="true" autocomplete="off" value="<?php echo $new_row['emp']; ?>">
 										</div>
 									</div>
 
@@ -205,14 +222,14 @@ if (isset($_POST['add_staff'])) {
 									<div class="col-md-4 col-sm-12">
 										<div class="form-group">
 											<label>Caste :</label>
-											<span name="caste" type="text" class="form-control" required="true" autocomplete="off"><?php echo $new_row['caste']; ?></span>
+											<input name="caste" type="text" class="form-control" required="true" autocomplete="off" value="<?php echo $new_row['caste']; ?>">
 										</div>
 									</div>
 
 									<div class="col-md-4 col-sm-12">
 										<div class="form-group">
 											<label>Sub-Caste :</label>
-											<span name="subcaste" type="text" class="form-control" required="true" autocomplete="off"><?php echo $new_row['subcaste']; ?></span>
+											<input name="subcaste" type="text" class="form-control" required="true" autocomplete="off" value="<?php echo $new_row['subcaste']; ?>">
 										</div>
 									</div>
 
@@ -228,14 +245,14 @@ if (isset($_POST['add_staff'])) {
 									<div class="col-md-4 col-sm-12">
 										<div class="form-group">
 											<label>Aadhar number :</label>
-											<span name="aadhar" type="text" class="form-control" required="true" autocomplete="off"><?php echo $new_row['aadhar']; ?></span>
+											<input name="aadhar" type="text" class="form-control" required="true" autocomplete="off" value="<?php echo $new_row['aadhar']; ?>">
 										</div>
 									</div>
 
 									<div class="col-md-4 col-sm-12">
 										<div class="form-group">
 											<label>Pan number :</label>
-											<span name="pan" type="text" class="form-control" required="true" autocomplete="off"><?php echo $new_row['pan']; ?></span>
+											<input name="pan" type="text" class="form-control" required="true" autocomplete="off" value="<?php echo $new_row['pan']; ?>">
 										</div>
 									</div>
 
@@ -250,7 +267,7 @@ if (isset($_POST['add_staff'])) {
 									<div class="col-md-4 col-sm-12">
 										<div class="form-group">
 											<label>SSC marks :</label>
-											<span name="ssc" type="text" class="form-control" required="true" autocomplete="off"><?php echo $new_row['ssc']; ?></span>
+											<input name="ssc" type="text" class="form-control" required="true" autocomplete="off" value="<?php echo $new_row['ssc']; ?>">
 										</div>
 									</div>
 
@@ -264,14 +281,14 @@ if (isset($_POST['add_staff'])) {
 									<div class="col-md-4 col-sm-12">
 										<div class="form-group">
 											<label>HSC marks :</label>
-											<span name="hsc" class="form-control" required="true" autocomplete="off" value=""><?php echo $new_row['hsc']; ?></span>
+											<input name="hsc" type="text" class="form-control" required="true" autocomplete="off" value="<?php echo $new_row['hsc']; ?>">
 										</div>
 									</div>
 
 									<div class="col-md-4 col-sm-12">
 										<div class="form-group">
 											<label>BE/B.Tech marks :</label>
-											<span name="be" type="text" class="form-control" required="true" autocomplete="off"><?php echo $new_row['be']; ?></span>
+											<input name="be" type="text" class="form-control" required="true" autocomplete="off" value="<?php echo $new_row['be']; ?>">
 										</div>
 									</div>
 								</div>
@@ -280,14 +297,14 @@ if (isset($_POST['add_staff'])) {
 									<div class="col-md-4 col-sm-12">
 										<div class="form-group">
 											<label>PG marks :</label>
-											<span name="pg" type="text" class="form-control" required="true" autocomplete="off"><?php echo $new_row['pg']; ?></span>
+											<input name="pg" type="text" class="form-control" required="true" autocomplete="off" value="<?php echo $new_row['pg']; ?>">
 										</div>
 									</div>
 
 									<div class="col-md-4 col-sm-12">
 										<div class="form-group">
 											<label>PHD marks :</label>
-											<span name="phd" type="text" class="form-control" required="true" autocomplete="off"><?php echo $new_row['phd']; ?></span>
+											<input name="phd" type="text" class="form-control" required="true" autocomplete="off" value="<?php echo $new_row['phd']; ?>">
 										</div>
 									</div>
 								</div>
@@ -301,35 +318,47 @@ if (isset($_POST['add_staff'])) {
 									<div class="col-md-4 col-sm-12">
 										<div class="form-group">
 											<label>Publication :</label>
-											<span name="publication" type="text" class="form-control" required="true" autocomplete="off"><?php echo $new_row['publication']; ?></span>
+											<input name="publication" type="text" class="form-control" required="true" autocomplete="off" value="<?php echo $new_row['publication']; ?>">
 										</div>
 									</div>
 
 									<div class="col-md-4 col-sm-12">
 										<div class="form-group">
 											<label>Journals :</label>
-											<span name="journal" type="text" class="form-control" required="true" autocomplete="off"><?php echo $new_row['journal']; ?></span>
+											<input name="journal" type="text" class="form-control" required="true" autocomplete="off" value="<?php echo $new_row['journal']; ?>">
 										</div>
 									</div>
 
 									<div class="col-md-4 col-sm-12">
 										<div class="form-group">
 											<label>Patents :</label>
-											<span name="patent" type="text" class="form-control" required="true" autocomplete="off"><?php echo $new_row['patent']; ?></span>
+											<input name="patent" type="text" class="form-control" required="true" autocomplete="off" value="<?php echo $new_row['patent']; ?>">
 										</div>
 									</div>
 								</div>
+
+								<div class="col-md-4 col-sm-12 text-align-center">
+									<div class="form-group">
+										<label style="font-size:16px;"><b></b></label>
+										<div class="modal-footer justify-content-center">
+											<button class="btn btn-primary" name="add_staff" id="add_staff" data-toggle="modal">Update&nbsp;Faculty</button>
+										</div>
+									</div>
+								</div>
+
+
+
 							</section>
 						</form>
 					</div>
 				</div>
 
 			</div>
-			<?php include('includes/footer.php'); ?>
+			<?php include('includes_hod/footer.php'); ?>
 		</div>
 	</div>
 	<!-- js -->
-	<?php include('includes/scripts.php') ?>
+	<?php include('includes_hod/scripts.php') ?>
 </body>
 
 </html>

@@ -187,7 +187,7 @@ if (isset($_GET['delete'])) {
 							<label></label>
 							<div class="modal-footer justify-content-center">
 
-								<form method="post" action="includes/data.php">
+								<form method="post" action="includes/faculty_data.php">
 								<button type="submit" name="export" style="border-radius: 5px; padding: 10px; background-color:#9c94db; ">Download CSV</button>
 								</form>
 

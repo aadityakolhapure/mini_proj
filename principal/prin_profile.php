@@ -17,6 +17,7 @@ if (isset($_POST['new_update'])) {
 	$caste = $_POST['caste'];
 	$subcaste = $_POST['subcaste'];
 	$ssc = $_POST['ssc'];
+	$diploma = $_POST['diploma'];
 	$hsc = $_POST['hsc'];
 	$be = $_POST['be'];
 	$pg = $_POST['pg'];
@@ -25,7 +26,7 @@ if (isset($_POST['new_update'])) {
 	$journal = $_POST['journal'];
 	$patent = $_POST['patent'];
 
-	$result = mysqli_query($conn, "update tblemployees set FirstName='$fname', LastName='$lname', EmailId='$email', Gender='$gender', Dob='$dob', Department='$department', Address='$address', Phonenumber='$phonenumber', emp = '$emp', aadhar = '$aadhar', pan = '$pan', caste = '$caste', subcaste = '$subcaste', ssc = '$ssc', hsc = '$hsc', be = '$be', pg = '$pg', phd = '$phd', publication = '$publication', journal = '$journal', patent = '$patent' where emp_id='$session_id'         
+	$result = mysqli_query($conn, "update tblemployees set FirstName='$fname', LastName='$lname', EmailId='$email', Gender='$gender', Dob='$dob', Department='$department', Address='$address', Phonenumber='$phonenumber', emp = '$emp', aadhar = '$aadhar', pan = '$pan', caste = '$caste', subcaste = '$subcaste', ssc = '$ssc',diploma = '$diploma', hsc = '$hsc', be = '$be', pg = '$pg', phd = '$phd', publication = '$publication', journal = '$journal', patent = '$patent' where emp_id='$session_id'         
 		") or die(mysqli_error());
 	if ($result) {
 		echo "<script>alert('Your records Successfully Updated');</script>";
@@ -343,6 +344,14 @@ if (isset($_POST["update_image"])) {
 																<input name="ssc" class="form-control form-control-lg" type="text" placeholder="" required="true" autocomplete="off" value="<?php echo $row['ssc']; ?>">
 															</div>
 														</div>
+
+														<div class="weight-500 col-md-6">
+															<div class="form-group">
+																<label>Diploma marks</label>
+																<input name="diploma" class="form-control form-control-lg" type="text" placeholder="" required="true" autocomplete="off" value="<?php echo $row['diploma']; ?>">
+															</div>
+														</div>
+
 
 														<div class="weight-500 col-md-6">
 															<div class="form-group">

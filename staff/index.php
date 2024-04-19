@@ -167,7 +167,8 @@
 								<th>DATE TO</th>
 								<th>NO. OF DAYS</th>
 								<th>HOD STATUS</th>
-								<th>REG. STATUS</th>
+								<th>ADMIN STATUS</th>
+								<th>PRINCIPAL STATUS</th>
 								<th class="datatable-nosort">ACTION</th>
 							</tr>
 						</thead>
@@ -200,15 +201,28 @@
 											<?php } ?>
 
 										</td>
-										<td><?php $stats = $result->admin_status;
-											if ($stats == 1) {
+										<td><?php $admin_stats = $result->admin_status;
+											if ($admin_stats == 1) {
 											?>
-												<span style="color: green">Approved</span>
+												<span style="color: green">Forward</span>
 											<?php }
-											if ($stats == 2) { ?>
-												<span style="color: red">Not Approved</span>
+											if ($admin_stats == 2) { ?>
+												<span style="color: red">Rejected</span>
 											<?php }
-											if ($stats == 0) { ?>
+											if ($admin_stats == 0) { ?>
+												<span style="color: blue">Pending</span>
+											<?php } ?>
+
+										</td>
+										<td><?php $prin_stats = $result->principal_status;
+											if ($prin_stats == 1) {
+											?>
+												<span style="color: green">Approve</span>
+											<?php }
+											if ($prin_stats == 2) { ?>
+												<span style="color: red">Rejected</span>
+											<?php }
+											if ($prin_stats == 0) { ?>
 												<span style="color: blue">Pending</span>
 											<?php } ?>
 

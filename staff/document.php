@@ -119,6 +119,54 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-4 col-sm-12">
+                    <div class="form-group">
+                        <label>Diploma MarkSheet</label>
+                        <div class="diploma-photo">
+                            <?php
+                            if (isset($_POST["update_diploma"])) {
+                                $diploma_name = $_FILES['image90']['name'];
+                                if (!empty($diploma_name)) {
+                                    move_uploaded_file($_FILES['image90']['tmp_name'], '../uploads/diploma/' . $diploma_name);
+                                    $diploma_pdf = $diploma_name;
+                                } else {
+                                    echo "<script>alert('Please Select PDF to Update');</script>";
+                                }
+
+                                $result = mysqli_query($conn, "update tblemployees set diploma_pdf='$diploma_pdf' where emp_id='$session_id'") or die(mysqli_error());
+                                if ($result) {
+                                    echo "<script>alert('Diploma marksheet Updated');</script>";
+                                    echo "<script type='text/javascript'> document.location = 'document.php'; </script>";
+                                } else {
+                                    die(mysqli_error());
+                                }
+                            }
+                            ?>
+                            <a href="#pan_modal" data-toggle="modal" data-target="#diploma_modal" class="edit-avatar"><i class="fa fa-pencil"></i></a>
+                            <iframe src="<?php echo (!empty($row['diploma_pdf'])) ? '../uploads/diploma/' . $row['diploma_pdf'] : ''; ?>" width="300px" height="300px"></iframe>
+                            <form method="post" enctype="multipart/form-data">
+                                <div class="modal fade" id="diploma_modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="weight-500 col-md-12 pd-5">
+                                                <div class="form-group">
+                                                    <div class="custom-file">
+                                                        <input name="image90" id="diploma_file" type="file" class="custom-file-input" onchange="validateDiplomaImage('diploma_file')">
+                                                        <label class="custom-file-label" for="diploma_file">Choose file</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <input type="submit" name="update_diploma" value="Update" class="btn btn-primary">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="row">
@@ -155,7 +203,7 @@
                                             <div class="weight-500 col-md-12 pd-5">
                                                 <div class="form-group">
                                                     <div class="custom-file">
-                                                        <input name="image2" id="ssc_file" type="file" class="custom-file-input" onchange="validateSscImage('ssc_file')">
+                                                        <input name="image2" id="ssc_file" type="file" class="custom-file-input" onchange="validateImage('ssc_file')">
                                                         <label class="custom-file-label" for="ssc_file">Choose file</label>
                                                     </div>
                                                 </div>
@@ -432,6 +480,23 @@
         }
 
         function validateSscImage(id) {
+            var file = document.getElementById(id).files[0];
+            var t = file.type.split('/').pop().toLowerCase();
+            if (t != "pdf") {
+                alert('Please select a valid PDF file');
+                document.getElementById(id).value = '';
+                return false;
+            }
+            if (file.size > 1050000) {
+                alert('Max upload size is 1MB');
+                document.getElementById(id).value = '';
+                return false;
+            }
+
+            return true;
+        }
+
+        function validateDiplomaImage(id) {
             var file = document.getElementById(id).files[0];
             var t = file.type.split('/').pop().toLowerCase();
             if (t != "pdf") {

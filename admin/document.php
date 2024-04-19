@@ -83,6 +83,12 @@
                                             <iframe src="<?php echo (!empty($row['ssc_pdf'])) ? '../uploads/SSC/' . $row['ssc_pdf'] : '../uploads/SSC/NO-IMAGE-AVAILABLE.jpg'; ?>" width="300px" height="300px" alt=""></iframe>
                                         </div>
                                     </div>
+                                    <div class="col-md-4 col-sm-12">
+                                        <div class="avatar mr-2 flex-shrink-0">
+                                            <label style="font-size: 18px;">Diploma Marksheet:</label>
+                                            <iframe src="<?php echo (!empty($row['diploma_pdf'])) ? '../uploads/diploma/' . $row['diploma_pdf'] : '../uploads/diploma/NO-IMAGE-AVAILABLE.jpg'; ?>" width="300px" height="300px" alt=""></iframe>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4 col-sm-12">

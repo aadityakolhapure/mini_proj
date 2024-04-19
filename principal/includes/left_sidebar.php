@@ -19,7 +19,7 @@
 				</li>
 				<li class="dropdown">
 					<a href="javascript:;" class="dropdown-toggle">
-						<span class="micon dw dw-library"></span><span class="mtext">Staff</span>
+						<span class="micon dw dw-library"></span><span class="mtext">Faculty</span>
 					</a>
 					<ul class="submenu">
 						<li><a href="principal.php">Principal</a></li>
