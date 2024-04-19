@@ -1,40 +1,57 @@
 <?php
 session_start();
 include('includes/config.php');
-if (isset($_POST['signin'])) {
-	$username = $_POST['username'];
-	$password = md5($_POST['password']);
 
-	$sql = "SELECT * FROM tblemployees where EmailId ='$username' AND Password ='$password'";
-	$query = mysqli_query($conn, $sql);
-	$count = mysqli_num_rows($query);
-	if ($count > 0) {
-		while ($row = mysqli_fetch_assoc($query)) {
-			if ($row['role'] == 'Admin') {
-				$_SESSION['alogin'] = $row['emp_id'];
-				$_SESSION['arole'] = $row['Department'];
-				echo "<script type='text/javascript'> document.location = 'admin/admin_dashboard.php'; </script>";
-			} elseif ($row['role'] == 'Staff') {
-				$_SESSION['alogin'] = $row['emp_id'];
-				$_SESSION['arole'] = $row['Department'];
-				echo "<script type='text/javascript'> document.location = 'staff/index.php'; </script>";
-			} elseif ($row['role'] == 'Principal') {
-				$_SESSION['alogin'] = $row['emp_id'];
-				// $_SESSION['arole']=$row['Department'];
-				echo "<script type='text/javascript'> document.location = 'principal/index.php'; </script>";
-			} else {
-				$_SESSION['alogin'] = $row['emp_id'];
-				$_SESSION['arole'] = $row['Department'];
-				echo "<script type='text/javascript'> document.location = 'heads/index.php'; </script>";
-			}
-		}
-	} else {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
 
-		echo "<script>alert('Invalid Details');</script>";
-	}
+    // Validate input
+    if (empty($username) || empty($password)) {
+        $error = 'Please enter both username and password.';
+    } else {
+        // Prepare the SQL statement using parameterized queries
+        $stmt = $conn->prepare("SELECT * FROM tblemployees WHERE EmailId = ?");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $hashedPassword = $row['Password'];
+
+            // Verify the password using password_verify
+            if (password_verify($password, $hashedPassword)) {
+                $role = $row['role'];
+                $empId = $row['emp_id'];
+                $department = $row['Department'];
+
+                // Set session variables
+                $_SESSION['alogin'] = $empId;
+                $_SESSION['arole'] = $department;
+
+                // Redirect based on role
+                if ($role == 'Admin') {
+                    header('Location: admin/admin_dashboard.php');
+                    exit;
+                } elseif ($role == 'Staff') {
+                    header('Location: staff/index.php');
+                    exit;
+                } elseif ($role == 'Principal') {
+                    header('Location: principal/index.php');
+                    exit;
+                } else {
+                    header('Location: heads/index.php');
+                    exit;
+                }
+            } else {
+                $error = 'Invalid username or password.';
+            }
+        } else {
+            $error = 'Invalid username or password.';
+        }
+    }
 }
-// $_SESSION['alogin']=$_POST['username'];
-// 	echo "<script type='text/javascript'> document.location = 'changepassword.php'; </script>";
 ?>
 
 <!DOCTYPE html>
@@ -121,7 +138,7 @@ if (isset($_POST['signin'])) {
 							</div>
 							<div class="row pb-30">
 								<div class="col-6">
-									<div class="forgot-password"><a href="forget_password.php">Forgot Password</a></div>
+									<div class="forgot-password"><a href="forget-password.php">Forgot Password</a></div>
 								</div>
 							</div>
 							<div class="row">
