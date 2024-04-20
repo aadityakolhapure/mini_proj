@@ -18,6 +18,7 @@ if (isset($_POST['new_update'])) {
 	$subcaste = $_POST['subcaste'];
 	$ssc = $_POST['ssc'];
 	$hsc = $_POST['hsc'];
+	$diploma = $_POST['diploma'];
 	$be = $_POST['be'];
 	$pg = $_POST['pg'];
 	$phd = $_POST['phd'];
@@ -25,7 +26,7 @@ if (isset($_POST['new_update'])) {
 	$journal = $_POST['journal'];
 	$patent = $_POST['patent'];
 
-	$result = mysqli_query($conn, "update tblemployees set FirstName='$fname', LastName='$lname', EmailId='$email', Gender='$gender', Dob='$dob', Department='$department', Address='$address', Phonenumber='$phonenumber', emp = '$emp', aadhar = '$aadhar', pan = '$pan', caste = '$caste', subcaste = '$subcaste', ssc = '$ssc', hsc = '$hsc', be = '$be', pg = '$pg', phd = '$phd', publication = '$publication', journal = '$journal', patent = '$patent' where emp_id='$session_id'         
+	$result = mysqli_query($conn, "update tblemployees set FirstName='$fname', LastName='$lname', EmailId='$email', Gender='$gender', Dob='$dob', Department='$department', Address='$address', Phonenumber='$phonenumber', emp = '$emp', aadhar = '$aadhar', pan = '$pan', caste = '$caste', subcaste = '$subcaste', ssc = '$ssc', hsc = '$hsc',diploma = '$diploma', be = '$be', pg = '$pg', phd = '$phd', publication = '$publication', journal = '$journal', patent = '$patent' where emp_id='$session_id'         
 		") or die(mysqli_error());
 	if ($result) {
 		echo "<script>alert('Your records Successfully Updated');</script>";
@@ -166,9 +167,7 @@ if (isset($_POST["update_image"])) {
 										<li class="nav-item">
 											<a class="nav-link" data-toggle="tab" href="#setting" role="tab">Settings</a>
 										</li>
-										<li class="nav-item">
-											<a class="nav-link" data-toggle="tab" href="#setting" role="tab">Upload Document</a>
-										</li>
+										
 									</ul>
 									<div class="tab-content">
 										<!-- Timeline Tab start -->
@@ -273,26 +272,7 @@ if (isset($_POST["update_image"])) {
 																<input name="address" class="form-control form-control-lg" type="text" placeholder="" required="true" autocomplete="off" value="<?php echo $row['Address']; ?>">
 															</div>
 														</div>
-														<div class="weight-500 col-md-6">
-															<div class="form-group">
-																<label>Department</label>
-																<select name="department" class="custom-select form-control" required="true" autocomplete="off">
-																	<?php
-																	$query_staff = mysqli_query($conn, "select * from tblemployees join  tbldepartments where emp_id = '$session_id'") or die(mysqli_error());
-																	$row_staff = mysqli_fetch_array($query_staff);
-
-																	?>
-																	<option value="<?php echo $row_staff['DepartmentShortName']; ?>"><?php echo $row_staff['DepartmentName']; ?></option>
-																	<?php
-																	$query = mysqli_query($conn, "select * from tbldepartments");
-																	while ($row = mysqli_fetch_array($query)) {
-
-																	?>
-																		<option value="<?php echo $row['DepartmentShortName']; ?>"><?php echo $row['DepartmentName']; ?></option>
-																	<?php } ?>
-																</select>
-															</div>
-														</div>
+														
 														<div class="weight-500 col-md-6">
 															<?php
 															$query = mysqli_query($conn, "select * from tblemployees where emp_id = '$session_id' ") or die(mysqli_error());
@@ -350,6 +330,13 @@ if (isset($_POST["update_image"])) {
 															<div class="form-group">
 																<label>Hsc marks</label>
 																<input name="hsc" class="form-control form-control-lg" type="text" placeholder="" required="true" autocomplete="off" value="<?php echo $row['hsc']; ?>">
+															</div>
+														</div>
+
+														<div class="weight-500 col-md-6">
+															<div class="form-group">
+																<label>Diploma marks</label>
+																<input name="diploma" class="form-control form-control-lg" type="text" placeholder="" required="true" autocomplete="off" value="<?php echo $row['diploma']; ?>">
 															</div>
 														</div>
 

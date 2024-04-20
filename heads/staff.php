@@ -40,87 +40,101 @@ if (isset($_GET['delete'])) {
 			<div class="title pb-20">
 				<h2 class="h3 mb-0">HOD Breakdown</h2>
 			</div>
+			
 			<div class="row pb-10">
-				<div class="col-xl-3 col-lg-3 col-md-6 mb-20">
-					<div class="card-box height-100-p widget-style3">
+        <div class="col-xl-3 col-lg-3 col-md-6 mb-20">
+          <div class="card-box height-100-p widget-style3">
+            <?php
+            $sql = "SELECT emp_id from tblemployees WHERE Department = '$session_depart'";
+            $query = $dbh->prepare($sql);
+            $query->execute();
+            $empcount = $query->rowCount();
+            ?>
+            <div class="d-flex flex-wrap">
+              <div class="widget-data">
+                <div class="weight-700 font-24 text-dark"><?php echo $empcount; ?></div>
+                <div class="font-14 text-secondary weight-500">Total Faculty in Department <br><br></div>
+              </div>
+              <div class="widget-icon">
+                <div class="icon" data-color="#00eccf"><i class="icon-copy dw dw-user-2"></i></div>
+              </div>
+            </div>
+          </div>
+        </div>   
 
-						<?php
-						$sql = "SELECT emp_id from tblemployees";
-						$query = $dbh->prepare($sql);
-						$query->execute();
-						$results = $query->fetchAll(PDO::FETCH_OBJ);
-						$empcount = $query->rowCount();
-						?>
+        <div class="col-xl-3 col-lg-3 col-md-6 mb-20">
+          <div class="card-box height-100-p widget-style3">
+            <?php
+            $status = 1;
+            $sql = "SELECT id from tblleaves WHERE Status = :status AND empid IN (SELECT emp_id FROM tblemployees WHERE Department = '$session_depart')";
+            $query = $dbh->prepare($sql);
+            $query->bindParam(':status', $status, PDO::PARAM_STR);
+            $query->execute();
+            $approvedLeaveCount = $query->rowCount();
+            ?>
+            <div class="d-flex flex-wrap">
+              <div class="widget-data">
+                <div class="weight-700 font-24 text-dark"><?php echo $approvedLeaveCount; ?></div>
+                <div class="font-14 text-secondary weight-500">Approved Leave <br><br></div>
+              </div>
+              <div class="widget-icon">
+                <div class="icon" data-color="#09cc06"><span class="icon-copy fa fa-hourglass"></span></div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-						<div class="d-flex flex-wrap">
-							<div class="widget-data">
-								<div class="weight-700 font-24 text-dark"><?php echo ($empcount); ?></div>
-								<div class="font-14 text-secondary weight-500">Total Employees</div>
-							</div>
-							<div class="widget-icon">
-								<div class="icon" data-color="#00eccf"><i class="icon-copy dw dw-user-2"></i></div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-xl-3 col-lg-3 col-md-6 mb-20">
-					<div class="card-box height-100-p widget-style3">
+        <div class="col-xl-3 col-lg-3 col-md-6 mb-20">
+          <div class="card-box height-100-p widget-style3">
+            <?php
+            $status = 0;
+            $sql = "SELECT id from tblleaves WHERE Status = :status AND empid IN (SELECT emp_id FROM tblemployees WHERE Department = '$session_depart')";
+            $query = $dbh->prepare($sql);
+            $query->bindParam(':status', $status, PDO::PARAM_STR);
+            $query->execute();
+            $pendingLeaveCount = $query->rowCount();
+            ?>
+            <div class="d-flex flex-wrap">
+              <div class="widget-data">
+                <div class="weight-700 font-24 text-dark"><?php echo $pendingLeaveCount; ?></div>
+                <div class="font-14 text-secondary weight-500">Pending Leave <br><br></div>
+              </div>
+              <div class="widget-icon">
+                <div class="icon"><i class="icon-copy fa fa-hourglass-end" aria-hidden="true"></i></div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-						<?php
-						$query_reg_staff = mysqli_query($conn, "select * from tblemployees where role = 'Staff' ") or die(mysqli_error());
-						$count_reg_staff = mysqli_num_rows($query_reg_staff);
-						?>
+        <div class="col-xl-3 col-lg-3 col-md-6 mb-20">
+          <div class="card-box height-100-p widget-style3">
+            <?php
+            $status = 2;
+            $sql = "SELECT id from tblleaves WHERE Status = :status AND empid IN (SELECT emp_id FROM tblemployees WHERE Department = '$session_depart')";
+            $query = $dbh->prepare($sql);
+            $query->bindParam(':status', $status, PDO::PARAM_STR);
+            $query->execute();
+            $rejectedLeaveCount = $query->rowCount();
+            ?>
+            <div class="d-flex flex-wrap">
+              <div class="widget-data">
+                <div class="weight-700 font-24 text-dark"><?php echo $rejectedLeaveCount; ?></div>
+                <div class="font-14 text-secondary weight-500">Rejected Leave <br><br></div>
+              </div>
+              <div class="widget-icon">
+                <div class="icon" data-color="#ff5b5b"><i class="icon-copy fa fa-hourglass-o" aria-hidden="true"></i></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-						<div class="d-flex flex-wrap">
-							<div class="widget-data">
-								<div class="weight-700 font-24 text-dark"><?php echo htmlentities($count_reg_staff); ?></div>
-								<div class="font-14 text-secondary weight-500">Faculty</div>
-							</div>
-							<div class="widget-icon">
-								<div class="icon" data-color="#09cc06"><span class="icon-copy fa fa-hourglass"></span></div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-xl-3 col-lg-3 col-md-6 mb-20">
-					<div class="card-box height-100-p widget-style3">
 
-						<?php
-						$query_reg_hod = mysqli_query($conn, "select * from tblemployees where role = 'HOD' ") or die(mysqli_error());
-						$count_reg_hod = mysqli_num_rows($query_reg_hod);
-						?>
 
-						<div class="d-flex flex-wrap">
-							<div class="widget-data">
-								<div class="weight-700 font-24 text-dark"><?php echo ($count_reg_hod); ?></div>
-								<div class="font-14 text-secondary weight-500">Department Heads</div>
-							</div>
-							<div class="widget-icon">
-								<div class="icon"><i class="icon-copy fa fa-hourglass-end" aria-hidden="true"></i></div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-xl-3 col-lg-3 col-md-6 mb-20">
-					<div class="card-box height-100-p widget-style3">
 
-						<?php
-						$query_reg_admin = mysqli_query($conn, "select * from tblemployees where role = 'Admin' ") or die(mysqli_error());
-						$count_reg_admin = mysqli_num_rows($query_reg_admin);
-						?>
 
-						<div class="d-flex flex-wrap">
-							<div class="widget-data">
-								<div class="weight-700 font-24 text-dark"><?php echo ($count_reg_admin); ?></div>
-								<div class="font-14 text-secondary weight-500">Head of Department</div>
-							</div>
-							<div class="widget-icon">
-								<div class="icon" data-color="#ff5b5b"><i class="icon-copy fa fa-hourglass-o" aria-hidden="true"></i></div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+
+
 
 			<div class="card-box mb-30">
 				<div class="pd-20">
@@ -175,7 +189,7 @@ if (isset($_GET['delete'])) {
 												<a class="dropdown-item" href="edit_staff.php?edit=<?php echo $row['emp_id']; ?>"><i class="dw dw-edit2"></i> Edit</a>
 												<a class="dropdown-item" href="document.php?edit=<?php echo $row['emp_id']; ?>"><i class="dw dw-edit2"></i>View Document</a>
 												<a class="dropdown-item" href="leave_history.php?emp_id=<?php echo $row['emp_id']; ?>"><i class="dw dw-edit2"></i> Leave History</a>
-											
+
 											</div>
 										</div>
 									</td>

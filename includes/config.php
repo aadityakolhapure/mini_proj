@@ -3,9 +3,9 @@
 define('DB_HOST','localhost');
 define('DB_USER','root');
 define('DB_PASS','');
-define('DB_NAME','project');
+define('DB_NAME','mini_project');
 
-$conn = mysqli_connect('localhost','root','','project') or die(mysqli_error());
+$conn = mysqli_connect('localhost','root','','mini_project') or die(mysqli_error());
 
 // Establish database connection.
 try

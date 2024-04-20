@@ -75,7 +75,7 @@ if (isset($_POST['add_staff'])) {
                             </div>
                             <nav aria-label="breadcrumb" role="navigation">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                                    <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">View Document</li>
                                 </ol>
                             </nav>
@@ -101,6 +101,7 @@ if (isset($_POST['add_staff'])) {
                                 $query = mysqli_query($conn, "select * from tblemployees where emp_id = '$get_id' ") or die(mysqli_error());
                                 $row = mysqli_fetch_array($query);
                                 ?>
+                                
 
                                 <div class="row">
                                     <div class="col-md-4 col-sm-12">
@@ -117,45 +118,99 @@ if (isset($_POST['add_staff'])) {
                                     </div>
                                     <div class="col-md-4 col-sm-12">
                                         <div class="avatar mr-2 flex-shrink-0">
-                                            <label style="font-size: 18px;">SSC Marksheet:</label>
+                                            <label style="font-size: 18px;">Passbook:</label>
+                                            <iframe src="<?php echo (!empty($row['passbook'])) ? '../uploads/passbook/' . $row['passbook'] : '../uploads/passbook/NO-IMAGE-AVAILABLE.jpg'; ?>" width="300px" height="300px" alt=""></iframe>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12">
+                                        <div class="avatar mr-2 flex-shrink-0">
+                                            <label style="font-size: 18px;">Caste Certificate:</label>
+                                            <iframe src="<?php echo (!empty($row['caste_crf'])) ? '../uploads/caste/' . $row['caste_crf'] : '../uploads/caste/NO-IMAGE-AVAILABLE.jpg'; ?>" width="300px" height="300px" alt=""></iframe>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12">
+                                        <div class="avatar mr-2 flex-shrink-0">
+                                            <label style="font-size: 18px;">Caste Validity Certificate:</label>
+                                            <iframe src="<?php echo (!empty($row['caste_validity'])) ? '../uploads/caste_validity1/' . $row['caste_validity'] : '../uploads/caste_validity1/NO-IMAGE-AVAILABLE.jpg'; ?>" width="300px" height="300px" alt=""></iframe>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12">
+                                        <div class="avatar mr-2 flex-shrink-0">
+                                            <label style="font-size: 18px;">Domacile Certificate:</label>
+                                            <iframe src="<?php echo (!empty($row['domacile'])) ? '../uploads/domacile/' . $row['domacile'] : '../uploads/domacile/NO-IMAGE-AVAILABLE.jpg'; ?>" width="300px" height="300px" alt=""></iframe>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4 col-sm-12">
+                                        <div class="avatar mr-2 flex-shrink-0">
+                                            <label style="font-size: 18px;">SSC marksheet:</label>
                                             <iframe src="<?php echo (!empty($row['ssc_pdf'])) ? '../uploads/SSC/' . $row['ssc_pdf'] : '../uploads/SSC/NO-IMAGE-AVAILABLE.jpg'; ?>" width="300px" height="300px" alt=""></iframe>
                                         </div>
                                     </div>
                                     <div class="col-md-4 col-sm-12">
                                         <div class="avatar mr-2 flex-shrink-0">
-                                            <label style="font-size: 18px;">Diploma Marksheet:</label>
-                                            <iframe src="<?php echo (!empty($row['diploma_pdf'])) ? '../uploads/diploma/' . $row['diploma_pdf'] : '../uploads/diploma/NO-IMAGE-AVAILABLE.jpg'; ?>" width="300px" height="300px" alt=""></iframe>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-4 col-sm-12">
-                                        <div class="avatar mr-2 flex-shrink-0">
-                                            <label style="font-size: 18px;">HSC Marksheet:</label>
+                                            <label style="font-size: 18px;">HSC marksheet:</label>
                                             <iframe src="<?php echo (!empty($row['hsc_pdf'])) ? '../uploads/HSC/' . $row['hsc_pdf'] : '../uploads/HSC/NO-IMAGE-AVAILABLE.jpg'; ?>" width="300px" height="300px" alt=""></iframe>
                                         </div>
                                     </div>
                                     <div class="col-md-4 col-sm-12">
                                         <div class="avatar mr-2 flex-shrink-0">
-                                            <label style="font-size: 18px;">BE/B.Tech Marksheet:</label>
-                                            <iframe src="<?php echo (!empty($row['be_pdf'])) ? '../uploads/BE/' . $row['be_pdf'] : '../uploads/BE/NO-IMAGE-AVAILABLE.jpg'; ?>" width="300px" height="300px" alt=""></iframe>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 col-sm-12">
-                                        <div class="avatar mr-2 flex-shrink-0">
-                                            <label style="font-size: 18px;">PG Marksheet:</label>
-                                            <iframe src="<?php echo (!empty($row['pg_pdf'])) ? '../uploads/PG/' . $row['pg_pdf'] : '../uploads/PG/NO-IMAGE-AVAILABLE.jpg'; ?>" width="300px" height="300px" alt=""></iframe>
+                                            <label style="font-size: 18px;">Diploma marksheet:</label>
+                                            <iframe src="<?php echo (!empty($row['diploma_mrk'])) ? '../uploads/dip_marksheet/' . $row['diploma_mrk'] : '../uploads/dip_marksheet/NO-IMAGE-AVAILABLE.jpg'; ?>" width="300px" height="300px" alt=""></iframe>
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="row">
                                     <div class="col-md-4 col-sm-12">
                                         <div class="avatar mr-2 flex-shrink-0">
-                                            <label style="font-size: 18px;">PHD Marksheet:</label>
-                                            <iframe src="<?php echo (!empty($row['phd_pdf'])) ? '../uploads/PHD/' . $row['phd_pdf'] : '../uploads/PHD/NO-IMAGE-AVAILABLE.jpg'; ?>" width="300px" height="300px" alt=""></iframe>
+                                            <label style="font-size: 18px;">UG marksheet:</label>
+                                            <iframe src="<?php echo (!empty($row['be_pdf'])) ? '../uploads/be_marksheet/' . $row['be_pdf'] : '../uploads/be_marksheet/NO-IMAGE-AVAILABLE.jpg'; ?>" width="300px" height="300px" alt=""></iframe>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12">
+                                        <div class="avatar mr-2 flex-shrink-0">
+                                            <label style="font-size: 18px;">UG Certificate:</label>
+                                            <iframe src="<?php echo (!empty($row['be_crf'])) ? '../uploads/be_certificate/' . $row['be_crf'] : '../uploads/be_certificate/NO-IMAGE-AVAILABLE.jpg'; ?>" width="300px" height="300px" alt=""></iframe>
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="row">
+                                    <div class="col-md-4 col-sm-12">
+                                        <div class="avatar mr-2 flex-shrink-0">
+                                            <label style="font-size: 18px;">PG marksheet:</label>
+                                            <iframe src="<?php echo (!empty($row['pg_pdf'])) ? '../uploads/PG_marksheet/' . $row['pg_pdf'] : '../uploads/PG_marksheet/NO-IMAGE-AVAILABLE.jpg'; ?>" width="300px" height="300px" alt=""></iframe>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12">
+                                        <div class="avatar mr-2 flex-shrink-0">
+                                            <label style="font-size: 18px;">PG Certificate:</label>
+                                            <iframe src="<?php echo (!empty($row['pg_crf'])) ? '../uploads/PG_certificate/' . $row['pg_crf'] : '../uploads/PG_certificate/NO-IMAGE-AVAILABLE.jpg'; ?>" width="300px" height="300px" alt=""></iframe>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-4 col-sm-12">
+                                        <div class="avatar mr-2 flex-shrink-0">
+                                            <label style="font-size: 18px;">PHD marksheet:</label>
+                                            <iframe src="<?php echo (!empty($row['phd_pdf'])) ? '../uploads/PHD_marksheet/' . $row['phd_pdf'] : '../uploads/PHD_marksheet/NO-IMAGE-AVAILABLE.jpg'; ?>" width="300px" height="300px" alt=""></iframe>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12">
+                                        <div class="avatar mr-2 flex-shrink-0">
+                                            <label style="font-size: 18px;">PHD Certificate:</label>
+                                            <iframe src="<?php echo (!empty($row['phd_crf'])) ? '../uploads/PHD_certificate/' . $row['phd_crf'] : '../uploads/PHD_certificate/NO-IMAGE-AVAILABLE.jpg'; ?>" width="300px" height="300px" alt=""></iframe>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
 
 
 

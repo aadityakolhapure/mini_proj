@@ -15,7 +15,7 @@
         </div>
     </div>
 
-    <?php include('includes/navbar.php') ?>
+    <?php include('includes/navbar.php') ?>   
     <?php include('includes/right_sidebar.php') ?>
     <?php include('includes/left_sidebar.php') ?>
 

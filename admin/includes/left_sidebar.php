@@ -18,6 +18,11 @@
 						
 					</li>
 					<li>
+						<a href="admin_doc.php" class="dropdown-toggle no-arrow">
+							<span class="micon dw dw-edit-2"></span><span class="mtext">Admin Document</span>
+						</a>
+					</li>
+					<li>
 						<a href="department.php" class="dropdown-toggle no-arrow">
 							<span class="micon dw dw-calendar1"></span><span class="mtext">Department</span>
 						</a>

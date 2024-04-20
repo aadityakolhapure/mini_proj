@@ -17,6 +17,11 @@
 					</a>
 
 				</li>
+				<li>
+					<a href="hod_doc.php" class="dropdown-toggle no-arrow">
+						<span class="micon dw dw-edit-2"></span><span class="mtext">HOD's Document</span>
+					</a>
+				</li>
 				<li class="dropdown">
 					<a href="javascript:;" class="dropdown-toggle">
 						<span class="micon dw dw-library"></span><span class="mtext">Faculty</span>
@@ -31,7 +36,7 @@
 					</a>
 					<ul class="submenu">
 						<li><a href="leaves.php">All Leave</a></li>
-						
+
 					</ul>
 				</li>
 

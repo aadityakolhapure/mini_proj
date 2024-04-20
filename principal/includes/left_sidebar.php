@@ -17,6 +17,11 @@
 					</a>
 
 				</li>
+				<li>
+						<a href="principal_doc.php" class="dropdown-toggle no-arrow">
+							<span class="micon dw dw-edit-2"></span><span class="mtext">Principal Document</span>
+						</a>
+					</li>
 				<li class="dropdown">
 					<a href="javascript:;" class="dropdown-toggle">
 						<span class="micon dw dw-library"></span><span class="mtext">Faculty</span>

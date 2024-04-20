@@ -257,7 +257,7 @@ if (isset($_POST['add_staff'])) {
 									<div class="col-md-4 col-sm-12">
 										<div class="form-group">
 											<label>Diploma marks :</label>
-											<input name="diploma" type="text" class="form-control" required="true" autocomplete="off" value="<?php echo $new_row['diploma']; ?>">
+											<span name="diploma" type="text" class="form-control" required="true" autocomplete="off"><?php echo $new_row['diploma']; ?></span>
 										</div>
 									</div>
 

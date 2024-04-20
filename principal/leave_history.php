@@ -1,6 +1,6 @@
 <?php
 include('includes/header.php');
-include('../includes/session.php');
+
 
 // Check if emp_id is provided in the URL
 if (isset($_GET['emp_id'])) {

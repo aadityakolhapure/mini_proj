@@ -12,6 +12,7 @@ if (isset($_POST['add_staff'])) {
 	$department = $_POST['department'];
 	$address = $_POST['address'];
 	$leave_days = $_POST['leave_days'];
+	$emp = $_POST['emp'];
 	$user_role = $_POST['user_role'];
 	$phonenumber = $_POST['phonenumber'];
 	$status = 1;
@@ -25,8 +26,10 @@ if (isset($_POST['add_staff'])) {
 		</script>
 	<?php
 	} else {
-		mysqli_query($conn, "INSERT INTO tblemployees(FirstName,LastName,EmailId,Password,Gender,Dob,Department,Address,Av_leave,role,Phonenumber,Status, location) VALUES('$fname','$lname','$email','$password','$gender','$dob','$department','$address','$leave_days','$user_role','$phonenumber','$status', 'NO-IMAGE-AVAILABLE.jpg')         
+		mysqli_query($conn, "INSERT INTO tblemployees(FirstName,LastName,EmailId,Password,Gender,Dob,Department,Address,Av_leave,role,Phonenumber,Status,emp, location) VALUES('$fname','$lname','$email','$password','$gender','$dob','$department','$address','$leave_days','$user_role','$phonenumber','$status','$emp', 'NO-IMAGE-AVAILABLE.jpg')         
 		") or die(mysqli_error()); ?>
+		
+		$mail->send();
 		<script>
 			alert('Faculty Records Successfully  Added');
 		</script>;
@@ -166,6 +169,13 @@ if (isset($_POST['add_staff'])) {
 								</div>
 
 								<div class="row">
+								<div class="col-md-4 col-sm-12">
+										<div class="form-group">
+											<label>Employee id Number :</label>
+											<input name="emp" type="number" class="form-control" required="true" autocomplete="off">
+										</div>
+									</div>
+
 									<div class="col-md-4 col-sm-12">
 										<div class="form-group">
 											<label>Faculty Leave Days :</label>
@@ -226,11 +236,13 @@ if (isset($_POST['add_staff'])) {
 											//Attachments
 											// $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
 											// $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+											$fullName -> $fname." ".$lname;
 
 											//Content
 											$mail->isHTML(true);                                  //Set email format to HTML
 											$mail->Subject = 'Welcome message';
-											$mail->Body    = 'Welcome , To Dnyanshree Institute ';
+											$mail->Body    = 'Welcome ,$fullName To Dnyanshree Institute of ENGineering AND Technology .
+											Your registered emailid is $email.';
 
 											$mail->send();
 											echo 'Message has been sent';

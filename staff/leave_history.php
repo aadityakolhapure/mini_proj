@@ -101,7 +101,7 @@ if (isset($_GET['delete'])) {
 								<div class="icon"><i class="icon-copy fa fa-hourglass-end" aria-hidden="true"></i></div>
 							</div>
 						</div>
-					</div>
+					</div>  
 				</div>
 				<div class="col-xl-3 col-lg-3 col-md-6 mb-20">
 					<div class="card-box height-100-p widget-style3">
@@ -186,7 +186,7 @@ if (isset($_GET['delete'])) {
 										</td>
 										<td>
 											<div class="table-actions">
-												<a title="VIEW" href="view_leave.php?edit=<?php echo htmlentities($result->id); ?>" data-color="#265ed7"><i class="icon-copy dw dw-eye"></i></a>
+				=								<a title="VIEW" href="view_leave.php?edit=<?php echo htmlentities($result->id); ?>" data-color="#265ed7"><i class="icon-copy dw dw-eye"></i></a>
 											</div>
 										</td>
 							</tr>
@@ -195,6 +195,7 @@ if (isset($_GET['delete'])) {
 								} ?>
 						</tbody>
 					</table>
+					
 				</div>
 			</div>
 

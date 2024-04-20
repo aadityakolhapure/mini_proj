@@ -183,7 +183,7 @@ if (isset($_POST['update'])) {
 										<div class="col-md-4 col-sm-12">
 											<div class="form-group">
 												<label style="font-size:16px;"><b>Leave Type</b></label>
-												<input type="text" class="selectpicker form-control" data-style="btn-outline-info" readonly value="<?php echo htmlentities($result->LeaveType); ?>">
+												<input type="text" class="form-control" data-style="btn-outline-info" readonly value="<?php echo $result->LeaveType; ?>">
 											</div>
 										</div>
 										<div class="col-md-4 col-sm-12">
@@ -211,6 +211,7 @@ if (isset($_POST['update'])) {
 												<input type="text" class="selectpicker form-control" data-style="btn-outline-info" readonly value="From <?php echo htmlentities($result->FromDate); ?> to <?php echo htmlentities($result->ToDate); ?>">
 											</div>
 										</div>
+										
 
 									</div>
 									<div class="form-group row">
@@ -220,24 +221,24 @@ if (isset($_POST['update'])) {
 										</div>
 									</div>
 									<div class="form-group row">
-										<label style="font-size:16px;" class="col-sm-12 col-md-2 col-form-label"><b>HOD Remarks</b></label>
+										<label style="font-size:16px;" class="col-sm-12 col-md-2 col-form-label"><b>ADMIN Remarks</b></label>
 										<div class="col-sm-12 col-md-10">
 											<?php
-											if ($result->AdminRemark == "") : ?>
+											if ($result->registra_remark == "") : ?>
 												<input type="text" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo "Waiting for Approval"; ?>">
 											<?php else : ?>
-												<input type="text" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo htmlentities($result->AdminRemark); ?>">
+												<input type="text" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo htmlentities($result->registra_remark); ?>">
 											<?php endif ?>
 										</div>
 									</div>
 									<div class="form-group row">
-										<label style="font-size:16px;" class="col-sm-12 col-md-2 col-form-label"><b>Reg. Remarks</b></label>
+										<label style="font-size:16px;" class="col-sm-12 col-md-2 col-form-label"><b>Principal Remarks</b></label>
 										<div class="col-sm-12 col-md-10">
 											<?php
-											if ($result->registra_remarks == "") : ?>
+											if ($result->principal_remarks == "") : ?>
 												<input type="text" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo "Waiting for Approval"; ?>">
 											<?php else : ?>
-												<input type="text" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo htmlentities($result->registra_remarks); ?>">
+												<input type="text" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo htmlentities($result->principal_remarks); ?>">
 											<?php endif ?>
 										</div>
 									</div>
@@ -245,7 +246,7 @@ if (isset($_POST['update'])) {
 										<div class="col-md-3">
 											<div class="form-group">
 												<label style="font-size:16px;"><b>Action Taken Date</b></label>
-												<?php
+												<?php  
 												if ($result->AdminRemarkDate == "") : ?>
 													<input type="text" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo "NA"; ?>">
 												<?php else : ?>
