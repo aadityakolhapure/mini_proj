@@ -62,7 +62,7 @@ if (isset($_POST["update_image"])) {
 <body>
 	<div class="pre-loader">
 		<div class="pre-loader-box">
-			<div class="loader-logo"><img src="../vendors/images/deskapp-logo-svg.png" alt=""></div>
+			<div class="loader-logo"><img src="../vendors/images/favicon-32x32.png" alt="" style="height: 100px; width: 100px;"></div>
 			<div class='loader-progress' id="progress_div">
 				<div class='bar' id='bar1'></div>
 			</div>
@@ -163,11 +163,11 @@ if (isset($_POST["update_image"])) {
 							<div class="profile-tab height-100-p">
 								<div class="tab height-100-p">
 									<ul class="nav nav-tabs customtab" role="tablist">
-										
+
 										<li class="nav-item">
 											<a class="nav-link" data-toggle="tab" href="#setting" role="tab">Settings</a>
 										</li>
-										
+
 									</ul>
 									<div class="tab-content">
 										<!-- Timeline Tab start -->
@@ -272,7 +272,7 @@ if (isset($_POST["update_image"])) {
 																<input name="address" class="form-control form-control-lg" type="text" placeholder="" required="true" autocomplete="off" value="<?php echo $row['Address']; ?>">
 															</div>
 														</div>
-														
+
 														<div class="weight-500 col-md-6">
 															<?php
 															$query = mysqli_query($conn, "select * from tblemployees where emp_id = '$session_id' ") or die(mysqli_error());

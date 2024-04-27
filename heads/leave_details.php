@@ -92,7 +92,7 @@ if (isset($_POST['update'])) {
 <body>
 	<div class="pre-loader">
 		<div class="pre-loader-box">
-			<div class="loader-logo"><img src="../vendors/images/deskapp-logo-svg.png" alt=""></div>
+			<div class="loader-logo"><img src="../vendors/images/favicon-32x32.png" alt="" style="height: 100px; width: 100px;"></div>
 			<div class='loader-progress' id="progress_div">
 				<div class='bar' id='bar1'></div>
 			</div>
@@ -211,7 +211,7 @@ if (isset($_POST['update'])) {
 												<input type="text" class="selectpicker form-control" data-style="btn-outline-info" readonly value="From <?php echo htmlentities($result->FromDate); ?> to <?php echo htmlentities($result->ToDate); ?>">
 											</div>
 										</div>
-										
+
 
 									</div>
 									<div class="form-group row">
@@ -246,7 +246,7 @@ if (isset($_POST['update'])) {
 										<div class="col-md-3">
 											<div class="form-group">
 												<label style="font-size:16px;"><b>Action Taken Date</b></label>
-												<?php  
+												<?php
 												if ($result->AdminRemarkDate == "") : ?>
 													<input type="text" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo "NA"; ?>">
 												<?php else : ?>

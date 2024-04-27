@@ -4,8 +4,8 @@
 if (isset($_POST['apply'])) {
 	$empid = $session_id;
 	$leave_type = $_POST['leave_type'];
-	$fromdate = date('d-m-Y', strtotime($_POST['date_from']));
-	$todate = date('d-m-Y', strtotime($_POST['date_to']));
+	$fromdate = date('Y-m-d', strtotime($_POST['date_from']));
+	$todate = date('Y-m-d', strtotime($_POST['date_to']));
 	$description = $_POST['description'];
 	$status = 0;
 	$isread = 0;
@@ -23,8 +23,23 @@ if (isset($_POST['apply'])) {
 
 		$diff =  date_diff($DF, $DT);
 		$num_days = (1 + $diff->format("%a"));
+		$dateA = date("Y-m-d");
+		// Assuming 'dateA' should be the current date
+		$existing_loadA = $_POST['existing_loadA']; // Assuming 'existing_loadA' is coming from the form
+		$schedule_timeA = $_POST['schedule_timeA']; // Assuming 'existing_loadA' is coming from the form
+		$classA = $_POST['classA']; // Assuming 'existing_loadA' is coming from the form
+		$alternative_facultyA = $_POST['alternative_facultyA'];
+		$existing_loadA = $_POST['existing_loadA']; // Assuming 'existing_loadA' is coming from the form
+		$date1 = $_POST['date1'];
 
-		$sql = "INSERT INTO tblleaves(LeaveType,ToDate,FromDate,Description,Status,IsRead,empid,num_days,PostingDate) VALUES(:leave_type,:fromdate,:todate,:description,:status,:isread,:empid,:num_days,:datePosting)";
+		$existing_load = $_POST['existing_load']; // Assuming 'existing_loadA' is coming from the form
+		$schedule_time = $_POST['schedule_time']; // Assuming 'existing_loadA' is coming from the form
+		$class = $_POST['class']; // Assuming 'existing_loadA' is coming from the form
+		$alternative_faculty = $_POST['alternative_faculty']; // Assuming 'existing_loadA' is coming from the form
+
+
+		$sql = "INSERT INTO tblleaves(LeaveType,ToDate,FromDate,Description,Status,IsRead,empid,num_days,PostingDate,dateA,existing_loadA,schedule_timeA,classA,alternative_facultyA,date1,existing_load,schedule_time,class,alternative_faculty) VALUES(:leave_type,:fromdate,:todate,:description,:status,:isread,:empid,:num_days,:datePosting,:dateA,:existing_loadA,:schedule_timeA,:classA,:alternative_facultyA,:date1,:existing_load,:schedule_time,:class,:alternative_faculty)";
+
 		$query = $dbh->prepare($sql);
 		$query->bindParam(':leave_type', $leave_type, PDO::PARAM_STR);
 		$query->bindParam(':fromdate', $fromdate, PDO::PARAM_STR);
@@ -35,6 +50,16 @@ if (isset($_POST['apply'])) {
 		$query->bindParam(':empid', $empid, PDO::PARAM_STR);
 		$query->bindParam(':num_days', $num_days, PDO::PARAM_STR);
 		$query->bindParam(':datePosting', $datePosting, PDO::PARAM_STR);
+		$query->bindParam(':dateA', $dateA, PDO::PARAM_STR);
+		$query->bindParam(':existing_loadA', $existing_loadA, PDO::PARAM_STR);
+		$query->bindParam(':schedule_timeA', $schedule_timeA, PDO::PARAM_STR);
+		$query->bindParam(':classA', $classA, PDO::PARAM_STR);
+		$query->bindParam(':alternative_facultyA', $alternative_facultyA, PDO::PARAM_STR);
+		$query->bindParam(':date1', $date1, PDO::PARAM_STR);
+		$query->bindParam(':existing_load', $existing_load, PDO::PARAM_STR);
+		$query->bindParam(':schedule_time', $schedule_time, PDO::PARAM_STR);
+		$query->bindParam(':class', $class, PDO::PARAM_STR);
+		$query->bindParam(':alternative_faculty', $alternative_faculty, PDO::PARAM_STR);
 		$query->execute();
 		$lastInsertId = $dbh->lastInsertId();
 		if ($lastInsertId) {
@@ -51,7 +76,7 @@ if (isset($_POST['apply'])) {
 <body>
 	<div class="pre-loader">
 		<div class="pre-loader-box">
-			<div class="loader-logo"><img src="../vendors/images/deskapp-logo-svg.png" alt=""></div>
+			<div class="loader-logo"><img src="../vendors/images/favicon-32x32.png" alt="" style="height: 100px; width: 100px;"></div>
 			<div class='loader-progress' id="progress_div">
 				<div class='bar' id='bar1'></div>
 			</div>
@@ -94,7 +119,7 @@ if (isset($_POST['apply'])) {
 				<div style="margin-left: 50px; margin-right: 50px;" class="pd-20 card-box mb-30">
 					<div class="clearfix">
 						<div class="pull-left">
-							<h4 class="text-blue h4">Faculty Form</h4>
+							<h3 class="text-blue h4">Faculty Form</h3>
 							<p class="mb-20"></p>
 						</div>
 					</div>
@@ -178,29 +203,111 @@ if (isset($_POST['apply'])) {
 												<textarea id="textarea1" name="description" class="form-control" required length="150" maxlength="150" required="true" autocomplete="off"></textarea>
 											</div>
 										</div>
-										<div class="col-md-4 col-sm-12">
+
+
+
+									</div>
+									<div class="clearfix">
+
+										<h3 class="text-blue h4">Load Balance</h3>
+										<p class="mb-20"></p>
+
+									</div>
+									<div class="row">
+										<div class="col-md-6 col-sm-12">
 											<div class="form-group">
-												<label style="font-size:16px;"><b></b></label>
-												<div class="modal-footer justify-content-center">
-													<button class="btn btn-primary" name="apply" id="apply" data-toggle="modal">Apply&nbsp;Leave</button>
-												</div>
+												<label>Date of load:</label>
+												<input name="dateA" type="text" class="form-control date-picker" required="true" autocomplete="off">
 											</div>
 										</div>
+										<div class="col-md-6 col-sm-12">
+											<div class="form-group">
+												<label>Existing Load</label>
+												<input name="existing_loadA" type="text" class="form-control" required="true" autocomplete="off">
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6 col-sm-12">
+											<div class="form-group">
+												<label>Schedule Time</label>
+												<input name="schedule_timeA" type="text" class="form-control" required="true" autocomplete="off">
+											</div>
+										</div>
+										<div class="col-md-6 col-sm-12">
+											<div class="form-group">
+												<label>Class</label>
+												<input name="classA" type="text" class="form-control" required="true" autocomplete="off">
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6 col-sm-12">
+											<div class="form-group">
+												<label>Name of Alternative Faculty</label>
+												<input name="alternative_facultyA" type="text" class="form-control" required="true" autocomplete="off">
+											</div>
+										</div>
+									</div>
+									<div class="clearfix">
 
+										<h6 class="text-blue h4">Load balance(Write null or none if there is no another load to balance)</h6>
+										<p class="mb-20"></p>
+
+									</div>
+
+									<div class="row">
+										<div class="col-md-6 col-sm-12">
+											<div class="form-group">
+												<label>Date of load:</label>
+												<input name="date1" type="text" class="form-control date-picker" required="true" autocomplete="off">
+											</div>
+										</div>
+										<div class="col-md-6 col-sm-12">
+											<div class="form-group">
+												<label>Existing Load</label>
+												<input name="existing_load" type="text" class="form-control" required="true" autocomplete="off">
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6 col-sm-12">
+											<div class="form-group">
+												<label>Schedule Time</label>
+												<input name="schedule_time" type="text" class="form-control" required="true" autocomplete="off">
+											</div>
+										</div>
+										<div class="col-md-6 col-sm-12">
+											<div class="form-group">
+												<label>Class</label>
+												<input name="class" type="text" class="form-control" required="true" autocomplete="off">
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6 col-sm-12">
+											<div class="form-group">
+												<label>Name of Alternative Faculty</label>
+												<input name="alternative_faculty" type="text" class="form-control" required="true" autocomplete="off">
+											</div>
+										</div>
+									</div>
+
+
+									<div class="col-md-4 col-sm-12">
+										<div class="form-group">
+											<label style="font-size:16px;"><b></b></label>
+											<div class="modal-footer justify-content-center">
+												<button class="btn btn-primary" name="apply" id="apply" data-toggle="modal">Apply&nbsp;Leave</button>
+											</div>
+										</div>
 									</div>
 							</section>
 						</form>
-						<form id="uploadForm" enctype="multipart/form-data" action="upload.php">
-							<div class="form-group">
-								<div class="custom-file">
-									<input name="image130" id="leave_file" type="file" class="custom-file-input" onchange="validateleaveImage('leave_file')">
-									<label class="custom-file-label" for="leave_file">Choose file</label>
-								</div>
-							</div>
-							<button type="button" class="btn btn-primary" id="uploadBtn">Upload</button>
-						</form>
-						
+
+
 					</div>
+
 				</div>
 
 			</div>

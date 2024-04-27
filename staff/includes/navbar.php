@@ -16,7 +16,7 @@
 
 				<a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
 					<span class="user-icon">
-						<img src="<?php echo (!empty($row['location'])) ? '../uploads/' . $row['location'] : '../uploads/NO-IMAGE-AVAILABLE.jpg'; ?>" alt="">
+						<img src="<?php echo (!empty($row['location'])) ? '../uploads/' . $row['location'] : '../uploads/NO-IMAGE-AVAILABLE.jpg'; ?>" alt="" style="height: 52px">
 					</span>
 					<span class="user-name"><?php echo $row['FirstName'] . " " . $row['LastName']; ?></span>
 				</a>

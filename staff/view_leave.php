@@ -34,8 +34,7 @@
 <body>
 	<div class="pre-loader">
 		<div class="pre-loader-box">
-			<div class="loader-logo"><img src="../vendors/images/deskapp-logo-svg.png" alt=""></div>
-			<div class='loader-progress' id="progress_div">
+		<div class="loader-logo"><img src="../vendors/images/favicon-32x32.png" alt="" style="height: 100px; width: 100px;"></div>			<div class='loader-progress' id="progress_div">
 				<div class='bar' id='bar1'></div>
 			</div>
 			<div class='percent' id='percent1'>0%</div>
@@ -88,7 +87,7 @@
 						else {
 						
 						$lid=intval($_GET['edit']);
-						$sql = "SELECT tblleaves.id as lid,tblemployees.FirstName,tblemployees.LastName,tblemployees.emp_id,tblemployees.Gender,tblemployees.Phonenumber,tblemployees.EmailId,tblemployees.Av_leave,tblleaves.LeaveType,tblleaves.ToDate,tblleaves.FromDate,tblleaves.Description,tblleaves.PostingDate,tblleaves.Status,tblleaves.AdminRemark,tblleaves.admin_status,tblleaves.registra_remarks,tblleaves.AdminRemarkDate,tblleaves.num_days from tblleaves join tblemployees on tblleaves.empid=tblemployees.emp_id where tblleaves.id=:lid";
+						$sql = "SELECT tblleaves.id as lid,tblemployees.FirstName,tblemployees.LastName,tblemployees.emp_id,tblemployees.Gender,tblemployees.Phonenumber,tblemployees.EmailId,tblemployees.Av_leave,tblleaves.LeaveType,tblleaves.ToDate,tblleaves.FromDate,tblleaves.Description,tblleaves.PostingDate,tblleaves.Status,tblleaves.AdminRemark,tblleaves.admin_status,tblleaves.registra_remarks,tblleaves.principal_status,tblleaves.principalRemark,tblleaves.principal_remark_date,tblleaves.AdminRemarkDate,tblleaves.num_days from tblleaves join tblemployees on tblleaves.empid=tblemployees.emp_id where tblleaves.id=:lid";
 						$query = $dbh -> prepare($sql);
 						$query->bindParam(':lid',$lid,PDO::PARAM_STR);
 						$query->execute();
@@ -165,7 +164,7 @@
 								</div>
 						</div>
 						<div class="form-group row">
-								<label style="font-size:16px;" class="col-sm-12 col-md-2 col-form-label"><b>HOD Remarks</b></label>
+								<label style="font-size:16px;" class="col-sm-12 col-md-2 col-form-label"><b>Admin Remarks</b></label>
 								<div class="col-sm-12 col-md-10">
 									<?php
 									if ($result->AdminRemark==""): ?>
@@ -176,13 +175,13 @@
 								</div>
 						</div>
 						<div class="form-group row">
-								<label style="font-size:16px;" class="col-sm-12 col-md-2 col-form-label"><b>Reg. Remarks</b></label>
+								<label style="font-size:16px;" class="col-sm-12 col-md-2 col-form-label"><b>Principal Remarks</b></label>
 								<div class="col-sm-12 col-md-10">
 									<?php
-									if ($result->registra_remarks==""): ?>
+									if ($result_prin->principalRemark==""): ?>
 									  <input type="text" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo "Waiting for Approval"; ?>">
 									<?php else: ?>
-									  <input type="text" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo htmlentities($result->registra_remarks); ?>">
+									  <input type="text" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo htmlentities($result_prin->principalRemark); ?>">
 									<?php endif ?>
 								</div>
 						</div>
@@ -191,10 +190,10 @@
 								<div class="form-group">
 								   <label style="font-size:16px;"><b>Action Taken Date</b></label>
 								   <?php
-									if ($result->AdminRemarkDate==""): ?>
+									if ($result->principal_remark_date==""): ?>
 									  <input type="text" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo "NA"; ?>">
 									<?php else: ?>
-									  <input type="text" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo htmlentities($result->AdminRemarkDate); ?>">
+									  <input type="text" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo htmlentities($result->principal_remark_date); ?>">
 									<?php endif ?>
 
 								</div>
@@ -202,11 +201,28 @@
 
 							<div class="col-md-4">
 								<div class="form-group">
-									<label style="font-size:16px;"><b>Leave Status From HOD</b></label>
+									<label style="font-size:16px;"><b>HOD  status</b></label>
 									<?php $stats=$result->Status;?>
 									<?php
 									if ($stats==1): ?>
-									  <input type="text" style="color: green;" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo "Approved"; ?>">
+									  <input type="text" style="color: green;" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo "Recommend"; ?>">
+									<?php
+									 elseif ($stats==2): ?>
+									  <input type="text" style="color: red; font-size: 16px;" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo "Not recommend"; ?>">
+									  <?php
+									else: ?>
+									  <input type="text" style="color: blue;" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo "Pending"; ?>">
+									<?php endif ?>
+								</div>
+							</div>
+
+							<div class="col-md-4">
+								<div class="form-group">
+									<label style="font-size:16px;"><b>Admin Status</b></label>
+									<?php $stats=$result->admin_status;?>
+									<?php
+									if ($stats==1): ?>
+									  <input type="text" style="color: green;" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo "Forwarded"; ?>">
 									<?php
 									 elseif ($stats==2): ?>
 									  <input type="text" style="color: red; font-size: 16px;" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo "Rejected"; ?>">
@@ -219,13 +235,13 @@
 
 							<div class="col-md-4">
 								<div class="form-group">
-									<label style="font-size:16px;"><b>Registra/Registry Status</b></label>
-									<?php $stats=$result->admin_status;?>
+									<label style="font-size:16px;"><b>Principal Status</b></label>
+									<?php $prin_stats=$result->principal_status;?>
 									<?php
-									if ($stats==1): ?>
+									if ($prin_stats==1): ?>
 									  <input type="text" style="color: green;" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo "Approved"; ?>">
 									<?php
-									 elseif ($stats==2): ?>
+									 elseif ($prin_stats==2): ?>
 									  <input type="text" style="color: red; font-size: 16px;" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo "Rejected"; ?>">
 									  <?php
 									else: ?>

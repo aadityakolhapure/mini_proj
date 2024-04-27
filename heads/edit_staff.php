@@ -44,7 +44,7 @@ if (isset($_POST['add_staff'])) {
 <body>
 	<div class="pre-loader">
 		<div class="pre-loader-box">
-			<div class="loader-logo"><img src="../vendors/images/deskapp-logo-svg.png" alt=""></div>
+			<div class="loader-logo"><img src="../vendors/images/favicon-32x32.png" alt="" style="height: 100px; width: 100px;"></div>
 			<div class='loader-progress' id="progress_div">
 				<div class='bar' id='bar1'></div>
 			</div>
@@ -149,21 +149,21 @@ if (isset($_POST['add_staff'])) {
 									<div class="col-md-4 col-sm-12">
 										<div class="form-group">
 											<label>Date Of Birth :</label>
-											<span name="dob" class="form-control" required="true" autocomplete="off" ><?php echo $row['Dob']; ?></span>
+											<span name="dob" class="form-control" required="true" autocomplete="off"><?php echo $row['Dob']; ?></span>
 										</div>
 									</div>
 									<div class="col-md-4 col-sm-12">
 										<div class="form-group">
 											<label>Address :</label>
-											<span name="address" class="form-control" required="true" autocomplete="off" ><?php echo $row['Address']; ?></span>
+											<span name="address" class="form-control" required="true" autocomplete="off"><?php echo $row['Address']; ?></span>
 										</div>
 									</div>
 									<div class="col-md-4 col-sm-12">
 										<div class="form-group">
 											<label>Department :</label>
 											<span name="department" class="custom-select form-control" required="true" autocomplete="off">
-											<?php echo $row['Department']; ?>
-												
+												<?php echo $row['Department']; ?>
+
 											</span>
 										</div>
 									</div>
@@ -186,7 +186,7 @@ if (isset($_POST['add_staff'])) {
 											<label>User Role :</label>
 											<span name="user_role" class="custom-select form-control" required="true" autocomplete="off">
 												<?php echo $new_row['role']; ?>
-												
+
 											</span>
 										</div>
 									</div>
@@ -194,7 +194,7 @@ if (isset($_POST['add_staff'])) {
 									<div class="col-md-4 col-sm-12">
 										<div class="form-group">
 											<label>Employment ID :</label>
-											<span name="emp_id" type="text" class="form-control" required="true" autocomplete="off" ><?php echo $new_row['emp']; ?></span>
+											<span name="emp_id" type="text" class="form-control" required="true" autocomplete="off"><?php echo $new_row['emp']; ?></span>
 										</div>
 									</div>
 

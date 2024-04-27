@@ -1,38 +1,39 @@
-<?php include('includes_hod/header.php')?>
-<?php include('../includes/session.php')?>
+<?php include('includes_hod/header.php') ?>
+<?php include('../includes/session.php') ?>
 <?php
-	if(isset($_POST['add_staff']))
-	{
-	
-	$fname=$_POST['firstname'];
-	$lname=$_POST['lastname'];   
-	$email=$_POST['email']; 
-	$password=md5($_POST['password']); 
-	$gender=$_POST['gender']; 
-	$dob=$_POST['dob']; 
-	$department=$_POST['department']; 
-	$address=$_POST['address']; 
-	$leave_days=$_POST['leave_days']; 
-	$user_role=$_POST['user_role']; 
-	$phonenumber=$_POST['phonenumber']; 
-	$status=1;
+if (isset($_POST['add_staff'])) {
 
-	 $query = mysqli_query($conn,"select * from tblemployees where EmailId = '$email'")or die(mysqli_error());
-	 $count = mysqli_num_rows($query);
-     
-     if ($count > 0){ ?>
-	 <script>
-	 alert('Data Already Exist');
-	</script>
-	<?php
-      }else{
-        mysqli_query($conn,"INSERT INTO tblemployees(FirstName,LastName,EmailId,Password,Gender,Dob,Department,Address,Av_leave,role,Phonenumber,Status, location) VALUES('$fname','$lname','$email','$password','$gender','$dob','$department','$address','$leave_days','$user_role','$phonenumber','$status', 'NO-IMAGE-AVAILABLE.jpg')         
-		") or die(mysqli_error()); ?>
-		<script>alert('Faculty Records Successfully  Added');</script>;
+	$fname = $_POST['firstname'];
+	$lname = $_POST['lastname'];
+	$email = $_POST['email'];
+	$password = md5($_POST['password']);
+	$gender = $_POST['gender'];
+	$dob = $_POST['dob'];
+	$department = $_POST['department'];
+	$address = $_POST['address'];
+	$leave_days = $_POST['leave_days'];
+	$user_role = $_POST['user_role'];
+	$phonenumber = $_POST['phonenumber'];
+	$status = 1;
+
+	$query = mysqli_query($conn, "select * from tblemployees where EmailId = '$email'") or die(mysqli_error());
+	$count = mysqli_num_rows($query);
+
+	if ($count > 0) { ?>
 		<script>
-		window.location = "staff.php"; 
+			alert('Data Already Exist');
 		</script>
-		<?php   }
+	<?php
+	} else {
+		mysqli_query($conn, "INSERT INTO tblemployees(FirstName,LastName,EmailId,Password,Gender,Dob,Department,Address,Av_leave,role,Phonenumber,Status, location) VALUES('$fname','$lname','$email','$password','$gender','$dob','$department','$address','$leave_days','$user_role','$phonenumber','$status', 'NO-IMAGE-AVAILABLE.jpg')         
+		") or die(mysqli_error()); ?>
+		<script>
+			alert('Faculty Records Successfully  Added');
+		</script>;
+		<script>
+			window.location = "staff.php";
+		</script>
+<?php   }
 }
 
 ?>
@@ -40,7 +41,7 @@
 <body>
 	<div class="pre-loader">
 		<div class="pre-loader-box">
-			<div class="loader-logo"><img src="../vendors/images/deskapp-logo-svg.png" alt=""></div>
+			<div class="loader-logo"><img src="../vendors/images/favicon-32x32.png" alt="" style="height: 100px; width: 100px;"></div>
 			<div class='loader-progress' id="progress_div">
 				<div class='bar' id='bar1'></div>
 			</div>
@@ -51,11 +52,11 @@
 		</div>
 	</div>
 
-	<?php include('includes_hod/navbar.php')?>
+	<?php include('includes_hod/navbar.php') ?>
 
-	<?php include('includes_hod/right_sidebar.php')?>
+	<?php include('includes_hod/right_sidebar.php') ?>
 
-	<?php include('includes_hod/left_sidebar.php')?>
+	<?php include('includes_hod/left_sidebar.php') ?>
 
 	<div class="mobile-menu-overlay"></div>
 
@@ -93,13 +94,13 @@
 								<div class="row">
 									<div class="col-md-4 col-sm-12">
 										<div class="form-group">
-											<label >First Name :</label>
+											<label>First Name :</label>
 											<input name="firstname" type="text" class="form-control wizard-required" required="true" autocomplete="off">
 										</div>
 									</div>
 									<div class="col-md-4 col-sm-12">
 										<div class="form-group">
-											<label >Last Name :</label>
+											<label>Last Name :</label>
 											<input name="lastname" type="text" class="form-control" required="true" autocomplete="off">
 										</div>
 									</div>
@@ -152,13 +153,13 @@
 											<label>Department :</label>
 											<select name="department" class="custom-select form-control" required="true" autocomplete="off">
 												<option value="">Select Department</option>
-													<?php
-													$query = mysqli_query($conn,"select * from tbldepartments where DepartmentShortName = '$session_depart'");
-													while($row = mysqli_fetch_array($query)){
-													
-													?>
+												<?php
+												$query = mysqli_query($conn, "select * from tbldepartments where DepartmentShortName = '$session_depart'");
+												while ($row = mysqli_fetch_array($query)) {
+
+												?>
 													<option value="<?php echo $row['DepartmentShortName']; ?>"><?php echo $row['DepartmentName']; ?></option>
-													<?php } ?>
+												<?php } ?>
 											</select>
 										</div>
 									</div>
@@ -171,7 +172,7 @@
 											<input name="leave_days" type="number" class="form-control" required="true" autocomplete="off">
 										</div>
 									</div>
-									
+
 									<div class="col-md-4 col-sm-12">
 										<div class="form-group">
 											<label>User Role :</label>
@@ -203,6 +204,7 @@
 		</div>
 	</div>
 	<!-- js -->
-	<?php include('includes_hod/scripts.php')?>
+	<?php include('includes_hod/scripts.php') ?>
 </body>
+
 </html>

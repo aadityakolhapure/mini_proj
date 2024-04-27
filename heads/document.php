@@ -43,7 +43,7 @@ if (isset($_POST['add_staff'])) {
 <body>
     <div class="pre-loader">
         <div class="pre-loader-box">
-            <div class="loader-logo"><img src="../vendors/images/deskapp-logo-svg.png" alt=""></div>
+            <div class="loader-logo"><img src="../vendors/images/favicon-32x32.png" alt="" style="height: 100px; width: 100px;"></div>
             <div class='loader-progress' id="progress_div">
                 <div class='bar' id='bar1'></div>
             </div>
@@ -101,7 +101,7 @@ if (isset($_POST['add_staff'])) {
                                 $query = mysqli_query($conn, "select * from tblemployees where emp_id = '$get_id' ") or die(mysqli_error());
                                 $row = mysqli_fetch_array($query);
                                 ?>
-                                
+
 
                                 <div class="row">
                                     <div class="col-md-4 col-sm-12">

@@ -16,7 +16,7 @@ if (isset($_GET['delete'])) {
 <body>
 	<div class="pre-loader">
 		<div class="pre-loader-box">
-			<div class="loader-logo"><img src="../vendors/images/deskapp-logo-svg.png" alt=""></div>
+			<div class="loader-logo"><img src="../vendors/images/favicon-32x32.png" alt="" style="height: 100px; width: 100px;"></div>
 			<div class='loader-progress' id="progress_div">
 				<div class='bar' id='bar1'></div>
 			</div>
@@ -88,7 +88,7 @@ if (isset($_GET['delete'])) {
 
 						<?php
 						$status = 0;
-						$query_pend = mysqli_query($conn, "select * from tblleaves where empid = '$session_id' AND Status = '$status'") or die(mysqli_error());
+						$query_pend = mysqli_query($conn, "select * from tblleaves where empid = '$session_id' AND Status = '$status' ") or die(mysqli_error());
 						$count_pending = mysqli_num_rows($query_pend);
 						?>
 
@@ -101,7 +101,7 @@ if (isset($_GET['delete'])) {
 								<div class="icon"><i class="icon-copy fa fa-hourglass-end" aria-hidden="true"></i></div>
 							</div>
 						</div>
-					</div>  
+					</div>
 				</div>
 				<div class="col-xl-3 col-lg-3 col-md-6 mb-20">
 					<div class="card-box height-100-p widget-style3">
@@ -138,7 +138,8 @@ if (isset($_GET['delete'])) {
 								<th>DATE TO</th>
 								<th>NO. OF DAYS</th>
 								<th>HOD STATUS</th>
-								<th>REG. STATUS</th>
+								<th>ADMIN STATUS </th>
+								<th>PRINCIPAL STATUS </th>
 								<th class="datatable-nosort">ACTION</th>
 							</tr>
 						</thead>
@@ -184,9 +185,22 @@ if (isset($_GET['delete'])) {
 											<?php } ?>
 
 										</td>
+										<td><?php $princ_stats = $result->principal_status;
+											if ($princ_stats == 1) {
+											?>
+												<span style="color: green">Approved</span>
+											<?php }
+											if ($princ_stats == 2) { ?>
+												<span style="color: red">Not Approved</span>
+											<?php }
+											if ($princ_stats == 0) { ?>
+												<span style="color: blue">Pending</span>
+											<?php } ?>
+
+										</td>
 										<td>
 											<div class="table-actions">
-				=								<a title="VIEW" href="view_leave.php?edit=<?php echo htmlentities($result->id); ?>" data-color="#265ed7"><i class="icon-copy dw dw-eye"></i></a>
+												 <a title="VIEW" href="view_leave.php?edit=<?php echo htmlentities($result->id); ?>" data-color="#265ed7"><i class="icon-copy dw dw-eye"></i></a>
 											</div>
 										</td>
 							</tr>
@@ -195,7 +209,7 @@ if (isset($_GET['delete'])) {
 								} ?>
 						</tbody>
 					</table>
-					
+
 				</div>
 			</div>
 
