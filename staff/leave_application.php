@@ -7,10 +7,55 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="form.css">
+	<style>
+		@media print {
+			body *:not(.container):not(.container *) {
+				visibility: hidden;
+			}
+
+			.container {
+				position: absolute;
+				/* margin: 12px; */
+			}
+		}
+
+		.main {
+			display: flex;
+			flex-direction: row;
+			align-items: stretch;
+		}
+
+		.main button {
+			/* 
+			width: 140px;
+			height: 30px;
+			align-items: center;
+			display: flex;
+			justify-content: center;
+			font-size: 15px;
+			cursor: pointer; */
+			margin: 10px;
+			cursor: pointer;
+			background-color: #fdc93b;
+            font-size: 16px;
+            font-weight: 550;
+            padding: 4px 12px;
+            border: 2px solid #000;
+            border-radius: 5px;
+            outline: none;
+            margin-left: 20px;
+		}
+
+		.main button a {
+			text-decoration: solid;
+			color: black;
+		}
+	</style>
 	<title>Document</title>
 </head>
 
 <body>
+
 	<div class="container">
 		<div class="header">
 			<div class="logo">
@@ -34,14 +79,12 @@
 				</div>
 			</div>
 
-
 			<?php
-			if (!isset($_GET['edit']) && empty($_GET['edit'])) {
+			if (!isset($_GET['edit']) || empty($_GET['edit'])) {
 				header('Location: index.php');
 			} else {
-
 				$lid = intval($_GET['edit']);
-				$sql = "SELECT tblleaves.id as lid,tblemployees.FirstName,tblemployees.LastName,tblemployees.emp_id,tblemployees.Gender,tblemployees.Phonenumber,tblemployees.EmailId,tblemployees.Av_leave,tblemployees.RegDate,tblemployees.Department,tblleaves.LeaveType,tblleaves.ToDate,tblleaves.FromDate,tblleaves.Description,tblleaves.PostingDate,tblleaves.Status,tblleaves.AdminRemark,tblleaves.admin_status,tblleaves.registra_remarks,tblleaves.AdminRemarkDate,tblleaves.num_days from tblleaves join tblemployees on tblleaves.empid=tblemployees.emp_id where tblleaves.id=:lid";
+				$sql = "SELECT tblleaves.id as lid, tblemployees.FirstName, tblemployees.LastName, tblemployees.emp_id, tblemployees.Gender, tblemployees.Phonenumber, tblemployees.EmailId, tblemployees.Av_leave, tblemployees.RegDate, tblemployees.Department, tblleaves.LeaveType, tblleaves.ToDate, tblleaves.FromDate, tblleaves.Description, tblleaves.PostingDate, tblleaves.Status, tblleaves.AdminRemark, tblleaves.admin_status,tblleaves.principal_status,tblleaves.principalRemark,tblleaves.principal_remark_date, tblleaves.registra_remarks, tblleaves.AdminRemarkDate, tblleaves.num_days FROM tblleaves JOIN tblemployees ON tblleaves.empid = tblemployees.emp_id WHERE tblleaves.id = :lid";
 				$query = $dbh->prepare($sql);
 				$query->bindParam(':lid', $lid, PDO::PARAM_STR);
 				$query->execute();
@@ -197,7 +240,7 @@
 					<span>Establishment Section</span>
 				</td>
 				<td>
-					<span>Remark: <?php echo htmlentities($result->AdminRemark); ?></span>
+					<span>Remark: <?php echo htmlentities($result->principalRemark); ?></span>
 				</td>
 			</table>
 			<table>
@@ -214,19 +257,19 @@
 								<td>1.</td>
 								<td></td>
 								<td><?php echo htmlentities($result->num_days); ?></td>
-								<td><?php echo htmlentities($result->Av_leave);?></td>
+								<td><?php echo htmlentities($result->Av_leave); ?></td>
 							</tr>
-							
+
 						</table>
 					</td>
 					<td>
 						<span>Approved:
-							<?php $stats = $result->admin_status; ?>
+							<?php $stats12 = $result->principal_status; ?>
 							<?php
-							if ($stats == 1) : ?>
+							if ($stats12 == 1) : ?>
 								<span style="color: green;"><?php echo "Approved"; ?></span>
 							<?php
-							elseif ($stats == 2) : ?>
+							elseif ($stats12 == 2) : ?>
 								<span style="color: red;"><?php echo "Rejected"; ?></span>
 							<?php
 							else : ?>
@@ -235,10 +278,10 @@
 						</span><br><br><br>
 						<div class="box">
 							<div class="da">
-								<span>Date: <?php echo htmlentities($result->AdminRemarkDate); ?></span>
+								<span>Date: <?php echo htmlentities($result->principal_remark_date); ?></span>
 							</div>
 							<div class="si">
-								Administrator
+								Principal
 							</div>
 						</div>
 					</td>
@@ -252,17 +295,18 @@
 
 
 	</div>
+	<div class="main">
+		<button id="print" onclick="window.print()">Print the Form</button>
+		<button id="print"><a href="view_leave.php?edit=<?php echo htmlentities($result->lid); ?>"> back</a></button>
+	</div>
 
-	<button id="print">Print the Form</button>
-	<button id="print"><a href="leave_history.php"> back</a></button>
 
-
-	<script>
+	<!-- <script>
 		const printDoc = document.getElementById('print');
 		printDoc.addEventListener('click', function() {
 			print();
 		});
-	</script>
+	</script> -->
 
 </body>
 

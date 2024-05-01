@@ -1,12 +1,12 @@
-<?php include('includes/config.php');?>
+<?php include('includes/config.php'); ?>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="vendors/styles/home copy.css">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
-        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
     <style>
         * {
             margin: 0;
@@ -166,7 +166,12 @@
             cursor: pointer;
         }
     </style>
-    <title>Document</title>
+    <title>Establishment Section</title>
+
+    <!-- Site favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="vendors/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="vendors/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="vendors/images/favicon-16x16.png">
 </head>
 
 <body>
@@ -239,10 +244,10 @@
 
 
     <script>
-        $('#menu-btn').click(function () {
+        $('#menu-btn').click(function() {
             $('nav .navigation ul').addClass('active')
         });
-        $('#menu-close').click(function () {
+        $('#menu-close').click(function() {
             $('nav .navigation ul').removeClass('active')
         });
     </script>

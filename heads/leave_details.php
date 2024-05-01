@@ -1,4 +1,3 @@
-<?php error_reporting(0); ?>
 <?php include('includes_hod/header.php') ?>
 <?php include('../includes/session.php') ?>
 
@@ -23,7 +22,7 @@ if (isset($_POST['update'])) {
 	$num_days = $_POST['num_days'];
 
 	// $REMLEAVE = $av_leave - $num_days;
-	$reg_remarks = 'Leave was Rejected. Registra/Registry will not see it';
+	$reg_remarks = 'Leave was Rejected. Admin will not see it';
 	$reg_status = 2;
 	date_default_timezone_set('Asia/Kolkata');
 	$admremarkdate = date('Y-m-d G:i:s ', strtotime("now"));
@@ -145,7 +144,7 @@ if (isset($_POST['update'])) {
 						} else {
 
 							$lid = intval($_GET['leaveid']);
-							$sql = "SELECT tblleaves.id as lid,tblemployees.FirstName,tblemployees.LastName,tblemployees.emp_id,tblemployees.Gender,tblemployees.Phonenumber,tblemployees.EmailId,tblemployees.Av_leave,tblleaves.LeaveType,tblleaves.ToDate,tblleaves.FromDate,tblleaves.Description,tblleaves.PostingDate,tblleaves.Status,tblleaves.AdminRemark,tblleaves.principal_remark,tblleaves.principal_remark_date,tblleaves.principal_status,tblleaves.PrincipalRemark,tblleaves.admin_status,tblleaves.registra_remarks,tblleaves.AdminRemarkDate,tblleaves.num_days from tblleaves join tblemployees on tblleaves.empid=tblemployees.emp_id where tblleaves.id=:lid";
+							$sql = "SELECT tblleaves.id as lid,tblemployees.FirstName,tblemployees.LastName,tblemployees.emp_id,tblemployees.Gender,tblemployees.Phonenumber,tblemployees.EmailId,tblemployees.Av_leave,tblleaves.LeaveType,tblleaves.ToDate,tblleaves.FromDate,tblleaves.Description,tblleaves.PostingDate,tblleaves.Status,tblleaves.AdminRemark,tblleaves.principal_remark,tblleaves.principal_remark_date,tblleaves.principal_status,tblleaves.PrincipalRemark,tblleaves.admin_status,tblleaves.registra_remarks,tblleaves.AdminRemarkDate,tblleaves.num_days,tblleaves.dateA,tblleaves.existing_loadA,tblleaves.schedule_timeA,tblleaves.classA,tblleaves.alternative_facultyA,tblleaves.date1,tblleaves.existing_load,tblleaves.schedule_time,tblleaves.class,tblleaves.alternative_faculty from tblleaves join tblemployees on tblleaves.empid=tblemployees.emp_id where tblleaves.id=:lid";
 							$query = $dbh->prepare($sql);
 							$query->bindParam(':lid', $lid, PDO::PARAM_STR);
 							$query->execute();
@@ -221,24 +220,24 @@ if (isset($_POST['update'])) {
 										</div>
 									</div>
 									<div class="form-group row">
-										<label style="font-size:16px;" class="col-sm-12 col-md-2 col-form-label"><b>ADMIN Remarks</b></label>
+										<label style="font-size:16px;" class="col-sm-12 col-md-2 col-form-label"><b>HOD Remarks</b></label>
 										<div class="col-sm-12 col-md-10">
 											<?php
-											if ($result->registra_remark == "") : ?>
+											if ($result->AdminRemark == "") : ?>
 												<input type="text" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo "Waiting for Approval"; ?>">
 											<?php else : ?>
-												<input type="text" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo htmlentities($result->registra_remark); ?>">
+												<input type="text" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo htmlentities($result->AdminRemark); ?>">
 											<?php endif ?>
 										</div>
 									</div>
 									<div class="form-group row">
-										<label style="font-size:16px;" class="col-sm-12 col-md-2 col-form-label"><b>Principal Remarks</b></label>
+										<label style="font-size:16px;" class="col-sm-12 col-md-2 col-form-label"><b>Principal Remark</b></label>
 										<div class="col-sm-12 col-md-10">
 											<?php
-											if ($result->principal_remarks == "") : ?>
+											if ($result->principal_remark == "") : ?>
 												<input type="text" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo "Waiting for Approval"; ?>">
 											<?php else : ?>
-												<input type="text" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo htmlentities($result->principal_remarks); ?>">
+												<input type="text" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo htmlentities($result->principal_remark); ?>">
 											<?php endif ?>
 										</div>
 									</div>
@@ -247,10 +246,10 @@ if (isset($_POST['update'])) {
 											<div class="form-group">
 												<label style="font-size:16px;"><b>Action Taken Date</b></label>
 												<?php
-												if ($result->AdminRemarkDate == "") : ?>
+												if ($result->principal_remark_date == "") : ?>
 													<input type="text" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo "NA"; ?>">
 												<?php else : ?>
-													<input type="text" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo htmlentities($result->AdminRemarkDate); ?>">
+													<input type="text" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo htmlentities($result->principal_remark_date); ?>">
 												<?php endif ?>
 
 											</div>
@@ -302,6 +301,47 @@ if (isset($_POST['update'])) {
 													<input type="text" style="color: blue;" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo "Pending"; ?>">
 												<?php endif ?>
 											</div>
+										</div>
+										<div class="row" style="display: flex; flex-direction:column; padding-left: 10px">
+
+											<div class="pd-20">
+												<h2 class="text-blue h4">Load Management</h2>
+											</div>
+											<div class="pb-10">
+												<table class="data-table table">
+													<thead>
+														<tr>
+															<th class="table-plus">Load Date</th>
+															<th>Existing load</th>
+															<th>Schedule Time</th>
+															<th>Class</th>
+															<th>Alternative Faculty</th>
+
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td><?php echo htmlentities($result->dateA); ?></td>
+															<td><?php echo htmlentities($result->existing_loadA); ?></td>
+															<td><?php echo htmlentities($result->schedule_timeA); ?></td>
+															<td><?php echo htmlentities($result->classA); ?></td>
+															<td><?php echo htmlentities($result->alternative_facultyA); ?></td>
+
+														</tr>
+														<tr>
+															<td><?php echo htmlentities($result->date1); ?></td>
+															<td><?php echo htmlentities($result->existing_load); ?></td>
+															<td><?php echo htmlentities($result->schedule_time); ?></td>
+															<td><?php echo htmlentities($result->class); ?></td>
+															<td><?php echo htmlentities($result->alternative_faculty); ?></td>
+
+														</tr>
+
+
+													</tbody>
+												</table>
+											</div>
+
 										</div>
 
 										<?php

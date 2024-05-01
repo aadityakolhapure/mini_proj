@@ -3,7 +3,7 @@
 include('../../includes/session.php');
 if (isset($_POST['export'])) {
     // Establish database connection
-    $conn = mysqli_connect('localhost', 'root', '', 'project') or die(mysqli_error());
+    $conn = mysqli_connect('localhost', 'root', '', 'mini_project') or die(mysqli_error());
 
     // SQL query to select data from your table
    

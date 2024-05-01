@@ -88,7 +88,7 @@ if (isset($_POST['signin'])) {
 	<div class="login-header box-shadow" style="height: 85px;">
 		<div class="container-fluid d-flex justify-content-between align-items-center">
 			<div class="brand-logo">
-				<a href="login.php">
+				<a href="index.php">
 					<img src="vendors/images/login_logo.png" alt="" style="width: 516px; height: 98px">
 				</a>
 			</div>

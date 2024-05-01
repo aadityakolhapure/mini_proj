@@ -96,7 +96,7 @@ if (isset($_POST['update'])) {
 <body>
 	<div class="pre-loader">
 		<div class="pre-loader-box">
-		<div class="loader-logo"><img src="../vendors/images/favicon-32x32.png" alt="" style="height: 100px; width: 100px;"></div>
+			<div class="loader-logo"><img src="../vendors/images/favicon-32x32.png" alt="" style="height: 100px; width: 100px;"></div>
 			<div class='loader-progress' id="progress_div">
 				<div class='bar' id='bar1'></div>
 			</div>
@@ -149,7 +149,7 @@ if (isset($_POST['update'])) {
 						} else {
 
 							$lid = intval($_GET['leaveid']);
-							$sql = "SELECT tblleaves.id as lid,tblemployees.FirstName,tblemployees.LastName,tblemployees.emp_id,tblemployees.Gender,tblemployees.Phonenumber,tblemployees.EmailId,tblemployees.Av_leave,tblleaves.LeaveType,tblleaves.ToDate,tblleaves.FromDate,tblleaves.Description,tblleaves.PostingDate,tblleaves.Status,tblleaves.AdminRemark,tblleaves.principal_remark,tblleaves.principal_remark_date,tblleaves.principal_status,tblleaves.PrincipalRemark,tblleaves.admin_status,tblleaves.registra_remarks,tblleaves.AdminRemarkDate,tblleaves.num_days from tblleaves join tblemployees on tblleaves.empid=tblemployees.emp_id where tblleaves.id=:lid";
+							$sql = "SELECT tblleaves.id as lid,tblemployees.FirstName,tblemployees.LastName,tblemployees.emp_id,tblemployees.Gender,tblemployees.Phonenumber,tblemployees.EmailId,tblemployees.Av_leave,tblleaves.LeaveType,tblleaves.ToDate,tblleaves.FromDate,tblleaves.Description,tblleaves.PostingDate,tblleaves.Status,tblleaves.AdminRemark,tblleaves.principal_remark,tblleaves.principal_remark_date,tblleaves.principal_status,tblleaves.PrincipalRemark,tblleaves.admin_status,tblleaves.registra_remarks,tblleaves.AdminRemarkDate,tblleaves.num_days,tblleaves.dateA,tblleaves.existing_loadA,tblleaves.schedule_timeA,tblleaves.classA,tblleaves.alternative_facultyA,tblleaves.date1,tblleaves.existing_load,tblleaves.schedule_time,tblleaves.class,tblleaves.alternative_faculty from tblleaves join tblemployees on tblleaves.empid=tblemployees.emp_id where tblleaves.id=:lid";
 							$query = $dbh->prepare($sql);
 							$query->bindParam(':lid', $lid, PDO::PARAM_STR);
 							$query->execute();
@@ -328,9 +328,50 @@ if (isset($_POST['update'])) {
 												<?php endif ?>
 											</div>
 										</div>
+										<div class="row" style="display: flex; flex-direction:column; padding-left: 10px">
+
+											<div class="pd-20">
+												<h2 class="text-blue h4">Load Management</h2>
+											</div>
+											<div class="pb-10">
+												<table class="data-table table">
+													<thead>
+														<tr>
+															<th class="table-plus">Load Date</th>
+															<th>Existing load</th>
+															<th>Schedule Time</th>
+															<th>Class</th>
+															<th>Alternative Faculty</th>
+
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td><?php echo htmlentities($result->dateA); ?></td>
+															<td><?php echo htmlentities($result->existing_loadA); ?></td>
+															<td><?php echo htmlentities($result->schedule_timeA); ?></td>
+															<td><?php echo htmlentities($result->classA); ?></td>
+															<td><?php echo htmlentities($result->alternative_facultyA); ?></td>
+
+														</tr>
+														<tr>
+															<td><?php echo htmlentities($result->date1); ?></td>
+															<td><?php echo htmlentities($result->existing_load); ?></td>
+															<td><?php echo htmlentities($result->schedule_time); ?></td>
+															<td><?php echo htmlentities($result->class); ?></td>
+															<td><?php echo htmlentities($result->alternative_faculty); ?></td>
+
+														</tr>
+
+
+													</tbody>
+												</table>
+											</div>
+
+										</div>
 
 										<?php
-										if (($stats == 1 AND $ad_stats == 1 AND $prin_stats == 0)) {
+										if (($stats == 1 and $ad_stats == 1 and $prin_stats == 0)) {
 
 										?>
 											<div class="col-md-3">
