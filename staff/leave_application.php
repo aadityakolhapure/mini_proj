@@ -1,12 +1,17 @@
 <?php include('../includes/config.php') ?>
 <?php include('../includes/session.php') ?>
 
+
 <html lang="en">
 
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="form.css">
+	<link rel="apple-touch-icon" sizes="180x180" href="../vendors/images/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="../vendors/images/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="../vendors/images/favicon-16x16.png">
+
 	<style>
 		@media print {
 			body *:not(.container):not(.container *) {
@@ -37,13 +42,13 @@
 			margin: 10px;
 			cursor: pointer;
 			background-color: #fdc93b;
-            font-size: 16px;
-            font-weight: 550;
-            padding: 4px 12px;
-            border: 2px solid #000;
-            border-radius: 5px;
-            outline: none;
-            margin-left: 20px;
+			font-size: 16px;
+			font-weight: 550;
+			padding: 4px 12px;
+			border: 2px solid #000;
+			border-radius: 5px;
+			outline: none;
+			margin-left: 20px;
 		}
 
 		.main button a {
@@ -51,11 +56,11 @@
 			color: black;
 		}
 	</style>
-	<title>Document</title>
+	<title>Establishment Section</title>
 </head>
 
 <body>
-
+	
 	<div class="container">
 		<div class="header">
 			<div class="logo">
@@ -84,7 +89,7 @@
 				header('Location: index.php');
 			} else {
 				$lid = intval($_GET['edit']);
-				$sql = "SELECT tblleaves.id as lid, tblemployees.FirstName, tblemployees.LastName, tblemployees.emp_id, tblemployees.Gender, tblemployees.Phonenumber, tblemployees.EmailId, tblemployees.Av_leave, tblemployees.RegDate, tblemployees.Department, tblleaves.LeaveType, tblleaves.ToDate, tblleaves.FromDate, tblleaves.Description, tblleaves.PostingDate, tblleaves.Status, tblleaves.AdminRemark, tblleaves.admin_status,tblleaves.principal_status,tblleaves.principalRemark,tblleaves.principal_remark_date, tblleaves.registra_remarks, tblleaves.AdminRemarkDate, tblleaves.num_days FROM tblleaves JOIN tblemployees ON tblleaves.empid = tblemployees.emp_id WHERE tblleaves.id = :lid";
+				$sql = "SELECT tblleaves.id as lid, tblemployees.FirstName, tblemployees.LastName, tblemployees.emp_id, tblemployees.Gender, tblemployees.Phonenumber, tblemployees.EmailId, tblemployees.Av_leave, tblemployees.RegDate, tblemployees.Department, tblleaves.LeaveType, tblleaves.ToDate, tblleaves.FromDate, tblleaves.Description, tblleaves.PostingDate, tblleaves.Status, tblleaves.AdminRemark, tblleaves.admin_status,tblleaves.principal_status,tblleaves.principalRemark,tblleaves.principal_remark_date, tblleaves.registra_remarks, tblleaves.AdminRemarkDate, tblleaves.num_days,tblleaves.dateA,tblleaves.existing_loadA,tblleaves.schedule_timeA,tblleaves.classA,tblleaves.alternative_facultyA,tblleaves.date1,tblleaves.existing_load,tblleaves.schedule_time,tblleaves.class,tblleaves.alternative_faculty FROM tblleaves JOIN tblemployees ON tblleaves.empid = tblemployees.emp_id WHERE tblleaves.id = :lid";
 				$query = $dbh->prepare($sql);
 				$query->bindParam(':lid', $lid, PDO::PARAM_STR);
 				$query->execute();
@@ -157,27 +162,24 @@
 					<td>Schedule <br>Time</td>
 					<td>Class</td>
 					<td>Name of <br>alternative <br>faculty</td>
-					<td>Designation</td>
 					<td>Sign <br>of alternative <br>faculty</td>
 				</tr>
 				<tr>
 					<td>1.</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
+					<td><?php echo htmlentities($result->dateA); ?></td>
+					<td><?php echo htmlentities($result->existing_loadA); ?></td>
+					<td><?php echo htmlentities($result->schedule_timeA); ?></td>
+					<td><?php echo htmlentities($result->classA); ?></td>
+					<td><?php echo htmlentities($result->alternative_facultyA); ?></td>
 					<td></td>
 				</tr>
 				<tr>
 					<td>2.</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
+					<td><?php echo htmlentities($result->date1); ?></td>
+					<td><?php echo htmlentities($result->existing_load); ?></td>
+					<td><?php echo htmlentities($result->schedule_time); ?></td>
+					<td><?php echo htmlentities($result->class); ?></td>
+					<td><?php echo htmlentities($result->alternative_faculty); ?></td>
 					<td></td>
 				</tr>
 				<tr>
@@ -188,11 +190,9 @@
 					<td></td>
 					<td></td>
 					<td></td>
-					<td></td>
 				</tr>
 				<tr>
 					<td>4.</td>
-					<td></td>
 					<td></td>
 					<td></td>
 					<td></td>
