@@ -50,7 +50,7 @@ include('../includes/session.php');
 					<h2 class="text-blue h4">LEAVE HISTORY</h2>
 				</div>
 				<div class="col-md-5">
-					<input type="text" id="searchInput2" class="form-control" placeholder="Search....">
+					<input type="text" id="searchInput" class="form-control" placeholder="Search....">
 				</div>
 				<div class="pb-20">
 				<table class="data-table table stripe hover nowrap" id="example">
@@ -121,7 +121,7 @@ include('../includes/session.php');
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script>
 		$(document).ready(function() {
-			$("#searchInput2").on("keyup", function() {
+			$("#searchInput").on("keyup", function() {
 				var value = $(this).val().toLowerCase();
 				$("#example tbody tr").filter(function() {
 					$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)

@@ -122,7 +122,7 @@ include('../includes/session.php'); ?>
 	<script src="../src/plugins/datatables/js/dataTables.responsive.min.js"></script>
 	<script src="../src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
 
-	<!-- buttons for Export datatable -->
+	<-- buttons for Export datatable -->
 <script src="../src/plugins/datatables/js/dataTables.buttons.min.js"></script>
 <script src="../src/plugins/datatables/js/buttons.bootstrap4.min.js"></script>
 <script src="../src/plugins/datatables/js/buttons.print.min.js"></script>
@@ -131,7 +131,7 @@ include('../includes/session.php'); ?>
 <script src="../src/plugins/datatables/js/vfs_fonts.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-	-- >
+
 	$(document).ready(function() {
 		$("#searchInput2").on("keyup", function() {
 			var value = $(this).val().toLowerCase();

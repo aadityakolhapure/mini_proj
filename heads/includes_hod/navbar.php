@@ -6,12 +6,15 @@
 	</div>
 	<div class="header-right">
 
-		<div class="dashboard-setting user-notification">
-			<div class="dropdown">
-				<a class="dropdown-toggle no-arrow" href="javascript:;" data-toggle="right-sidebar">
-					<i class="dw dw-settings2"></i>
-				</a>
-			</div>
+
+		<div class="col-md-6 col-sm-4 clearfix">
+			<ul class="notification-area pull-right">
+
+				<!-- Notification bell -->
+				<?php include 'hod_notif.php' ?>
+
+			</ul>
+			<!-- notification ends -->
 		</div>
 
 
@@ -24,7 +27,7 @@
 
 				<a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
 					<span class="user-icon">
-						<img src="<?php echo (!empty($row['location'])) ? '../uploads/' . $row['location'] : '../uploads/NO-IMAGE-AVAILABLE.jpg'; ?>" alt="" style="height: 52px";>
+						<img src="<?php echo (!empty($row['location'])) ? '../uploads/' . $row['location'] : '../uploads/NO-IMAGE-AVAILABLE.jpg'; ?>" alt="" style="height: 52px" ;>
 					</span>
 					<span class="user-name"><?php echo $row['FirstName'] . " " . $row['LastName']; ?></span>
 				</a>

@@ -47,7 +47,7 @@ if (isset($_POST['apply'])) {
 		$query->bindParam(':description', $description, PDO::PARAM_STR);
 		$query->bindParam(':status', $status, PDO::PARAM_STR);
 		$query->bindParam(':isread', $isread, PDO::PARAM_STR);
-		$query->bindParam(':empid', $empid, PDO::PARAM_STR);
+		$query->bindParam(':empid', $empid, PDO::PARAM_STR);  
 		$query->bindParam(':num_days', $num_days, PDO::PARAM_STR);
 		$query->bindParam(':datePosting', $datePosting, PDO::PARAM_STR);
 		$query->bindParam(':dateA', $dateA, PDO::PARAM_STR);
@@ -203,10 +203,8 @@ if (isset($_POST['apply'])) {
 												<textarea id="textarea1" name="description" class="form-control" required length="150" maxlength="150" required="true" autocomplete="off"></textarea>
 											</div>
 										</div>
-
-
-
 									</div>
+
 									<div class="clearfix">
 
 										<h3 class="text-blue h4">Load Balance</h3>

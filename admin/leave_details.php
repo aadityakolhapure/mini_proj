@@ -4,7 +4,7 @@
 
 <?php
 // code for update the read notification status
-$isread = 1;
+$isread = 2;
 $did = intval($_GET['leaveid']);
 date_default_timezone_set('Asia/Kolkata');
 $admremarkdate = date('Y-m-d G:i:s ', strtotime("now"));
