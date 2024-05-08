@@ -1,4 +1,13 @@
-<link rel="stylesheet" href="noti.css">
+<!-- <link rel="stylesheet" href="noti.css"> -->
+<style>
+  .pull-right {
+    float: right;
+    margin-top: 22px;
+    margin-right: 12px;
+    /* width: 54px; */
+    /* height: 30px; */
+  }
+</style>
 <?php
 define('DBNAME', 'mini_project');
 define('DBUSER', 'root');
