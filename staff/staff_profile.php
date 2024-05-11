@@ -27,7 +27,7 @@ if (isset($_POST['new_update'])) {
 	$journal = $_POST['journal'];
 	$patent = $_POST['patent'];
 
-	$result = mysqli_query($conn, "update tblemployees set FirstName='$fname', LastName='$lname', EmailId='$email', Gender='$gender', Dob='$dob', Department='$department', Address='$address', Phonenumber='$phonenumber', emp = '$emp', aadhar = '$aadhar', pan = '$pan', caste = '$caste', subcaste = '$subcaste', ssc = '$ssc', hsc = '$hsc', diploma ='$diploma', be = '$be', pg = '$pg', phd = '$phd', publication = '$publication', journal = '$journal', patent = '$patent' where emp_id='$session_id'         
+	$result = mysqli_query($conn, "update tblemployees set FirstName='$fname', LastName='$lname', EmailId='$email', Gender='$gender', Dob='$dob',  Address='$address', Phonenumber='$phonenumber', emp = '$emp', aadhar = '$aadhar', pan = '$pan', caste = '$caste', subcaste = '$subcaste', ssc = '$ssc', hsc = '$hsc', diploma ='$diploma', be = '$be', pg = '$pg', phd = '$phd', publication = '$publication', journal = '$journal', patent = '$patent' where emp_id='$session_id'         
 		") or die(mysqli_error());
 	if ($result) {
 		echo "<script>alert('Your records Successfully Updated');</script>";
@@ -294,28 +294,28 @@ if (isset($_POST["update_image"])) {
 
 														<div class="weight-500 col-md-6">
 															<div class="form-group">
-																<label>SSC marks</label>
+																<label>SSC percentage</label>
 																<input name="ssc" class="form-control form-control-lg" type="text" placeholder="" required="true" autocomplete="off" value="<?php echo $row['ssc']; ?>">
 															</div>
 														</div>
 
 														<div class="col-md-4 col-sm-12">
 															<div class="form-group">
-																<label>Diploma marks :</label>
+																<label>Diploma percentage :</label>
 																<input name="diploma" type="text" class="form-control" required="true" autocomplete="off" value="<?php echo $row['diploma']; ?>">
 															</div>
 														</div>
 
 														<div class="weight-500 col-md-6">
 															<div class="form-group">
-																<label>Hsc marks</label>
+																<label>Hsc percentage</label>
 																<input name="hsc" class="form-control form-control-lg" type="text" placeholder="" required="true" autocomplete="off" value="<?php echo $row['hsc']; ?>">
 															</div>
 														</div>
 
 														<div class="weight-500 col-md-6">
 															<div class="form-group">
-																<label>BE/B.Tech marks</label>
+																<label>Under Graduation marks</label>
 																<input name="be" class="form-control form-control-lg" type="text" placeholder="" required="true" autocomplete="off" value="<?php echo $row['be']; ?>">
 															</div>
 														</div>

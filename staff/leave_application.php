@@ -119,7 +119,6 @@
 		<div class="header4">
 			<table>
 				<tr>
-					<td>Destination: </td>
 					<td>department: <?php echo htmlentities($result->Department); ?></td>
 				</tr>
 			</table>

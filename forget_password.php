@@ -95,6 +95,8 @@ if (isset($_POST['submit'])) {
                                 </div>
                             </div>
 
+                            
+
                             <div class="input-group custom">
                                 <input type="password" class="form-control form-control-lg" placeholder="New Password" name="password" id="password">
                                 <div class="input-group-append custom">

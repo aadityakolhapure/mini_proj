@@ -39,7 +39,7 @@
 						<h4 class="font-20 weight-500 mb-10 text-capitalize">
 							Welcome back <div class="weight-600 font-30 text-blue"><?php echo $row['FirstName'] . " " . $row['LastName']; ?>,</div>
 						</h4>
-						<p class="font-18 max-width-600">in Dnyanshree Institute of Engineering and Technology, Satara as a <?php echo $row['role'] ?></p>
+						<p class="font-18 max-width-600">in Dnyanshree Institute of Engineering and Technology, Satara </p>
 					</div>
 				</div>
 			</div>

@@ -3,11 +3,18 @@
 <?php
 if (isset($_GET['delete'])) {
 	$delete = $_GET['delete'];
-	$sql = "DELETE FROM tblemployees where emp =$session_id " . $delete;
-	$result = mysqli_query($conn, $sql);
-	if ($result) {
-		echo "<script>alert('Faculty deleted Successfully');</script>";
-		echo "<script type='text/javascript'> document.location = 'staff.php'; </script>";
+	$stmt = $conn->prepare("DELETE FROM tblemployees WHERE emp_id = ?");
+	if ($stmt) {
+		$stmt->bind_param("i", $delete); // Bind the $delete parameter
+		if ($stmt->execute()) {
+			echo "<script>alert('Employee deleted successfully');</script>";
+			echo "<script type='text/javascript'> document.location = 'staff.php'; </script>";
+		} else {
+			echo "Error deleting record: " . $stmt->error;
+		}
+		$stmt->close();
+	} else {
+		echo "Error preparing statement: " . $conn->error;
 	}
 }
 
@@ -16,7 +23,7 @@ if (isset($_GET['delete'])) {
 <body>
 	<div class="pre-loader">
 		<div class="pre-loader-box">
-		<div class="loader-logo"><img src="../vendors/images/favicon-32x32.png" alt="" style="height: 100px; width: 100px;"></div>
+			<div class="loader-logo"><img src="../vendors/images/favicon-32x32.png" alt="" style="height: 100px; width: 100px;"></div>
 			<div class='loader-progress' id="progress_div">
 				<div class='bar' id='bar1'></div>
 			</div>
@@ -188,7 +195,7 @@ if (isset($_GET['delete'])) {
 							<div class="modal-footer justify-content-center">
 
 								<form method="post" action="includes/faculty_data.php">
-								<button type="submit" name="export" style="border-radius: 5px; padding: 10px; background-color:#9c94db; ">Download CSV</button>
+									<button type="submit" name="export" style="border-radius: 5px; padding: 10px; background-color:#9c94db; ">Download CSV</button>
 								</form>
 
 							</div>

@@ -39,7 +39,7 @@
 						<h4 class="font-20 weight-500 mb-10 text-capitalize">
 							Welcome back <div class="weight-600 font-30 text-blue"><?php echo $row['FirstName'] . " " . $row['LastName']; ?>,</div>
 						</h4>
-						<p class="font-18 max-width-600">in Dnyanshree Institute of Engineering and Technology, Satara as a <?php echo $row['role'] ?></p>
+						<p class="font-18 max-width-600">in Dnyanshree Institute of Engineering and Technology, Satara </p>
 					</div>
 				</div>
 			</div>
@@ -73,7 +73,7 @@
 												<div class="font-12 weight-500" data-color="#b2b1b6"><?php echo $row['EmailId']; ?></div>
 											</div>
 										</div>
-										<div class="font-12 weight-500" data-color="#17a2b8"><?php echo $row['Phonenumber']; ?></div>
+										
 									</li>
 								<?php } ?>
 							</ul>
@@ -107,7 +107,7 @@
 												<div class="font-12 weight-500" data-color="#b2b1b6"><?php echo $row['EmailId']; ?></div>
 											</div>
 										</div>
-										<div class="font-12 weight-500" data-color="#17a2b8"><?php echo $row['Phonenumber']; ?></div>
+										
 									</li>
 								<?php } ?>
 							</ul>
@@ -127,7 +127,7 @@
 						</div>
 
 						<div class="user-list">
-							<ul>   
+							<ul>
 								<?php
 								$query = mysqli_query($conn, "select * from tblemployees LEFT JOIN tbldepartments ON tblemployees.Department = tbldepartments.DepartmentShortName where tblemployees.role = 'Staff' and tblemployees.Department = '$session_depart' ORDER BY tblemployees.emp_id desc limit 4") or die(mysqli_error());
 								while ($row = mysqli_fetch_array($query)) {
@@ -145,7 +145,7 @@
 												<div class="font-12 weight-500" data-color="#b2b1b6"><?php echo $row['EmailId']; ?></div>
 											</div>
 										</div>
-										<div class="font-12 weight-500" data-color="#17a2b8"><?php echo $row['Phonenumber']; ?></div>
+										
 									</li>
 								<?php } ?>
 							</ul>

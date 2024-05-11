@@ -39,7 +39,7 @@
             <h4 class="font-20 weight-500 mb-10 text-capitalize">
               Welcome back <div class="weight-600 font-30 text-blue"><?php echo $row['FirstName'] . " " . $row['LastName']; ?>,</div>
             </h4>
-            <p class="font-18 max-width-600">in Dnyanshree Institute of Engineering and Technology, Satara as a <?php echo $row['role'] ?></p>
+            <p class="font-18 max-width-600">in Dnyanshree Institute of Engineering and Technology, Satara</p>
           </div>
         </div>
       </div>
@@ -246,7 +246,7 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
                           <a class="dropdown-item" href="leave_details.php?leaveid=<?php echo $result->lid; ?>"><i class="dw dw-eye"></i> View</a>
-                          <a class="dropdown-item" href="admin_dashboard.php?leaveid=<?php echo $result->lid; ?>"><i class="dw dw-delete-3"></i> Delete</a>
+
                         </div>
                       </div>
                     </td>

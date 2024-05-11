@@ -48,7 +48,7 @@ $unreadcount = $query->rowCount();
       if ($query->rowCount() > 0) {
         foreach ($results as $result) {
       ?>
-          <a href="../leave-details.php?leaveid=<?php echo htmlentities($result->lid); ?>" class="notify-item">
+          <a href="../leave_details.php?leaveid=<?php echo htmlentities($result->lid); ?>" class="notify-item">
             <div class="notify-thumb"><i class="ti-comments-smiley btn-info"></i></div>
             <div class="notify-text">
               <p><b><?php echo htmlentities($result->FirstName . " " . $result->LastName); ?> <br />(<?php echo htmlentities($result->emp_id); ?>) </b> has recently applied for a leave.</p>
