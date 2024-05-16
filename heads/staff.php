@@ -16,7 +16,7 @@ if (isset($_GET['delete'])) {
 <body>
 	<div class="pre-loader">
 		<div class="pre-loader-box">
-		<div class="loader-logo"><img src="../vendors/images/favicon-32x32.png" alt="" style="height: 100px; width: 100px;"></div>
+			<div class="loader-logo"><img src="../vendors/images/favicon-32x32.png" alt="" style="height: 100px; width: 100px;"></div>
 			<div class='loader-progress' id="progress_div">
 				<div class='bar' id='bar1'></div>
 			</div>
@@ -40,94 +40,94 @@ if (isset($_GET['delete'])) {
 			<div class="title pb-20">
 				<h2 class="h3 mb-0">HOD Breakdown</h2>
 			</div>
-			
+
 			<div class="row pb-10">
-        <div class="col-xl-3 col-lg-3 col-md-6 mb-20">
-          <div class="card-box height-100-p widget-style3">
-            <?php
-            $sql = "SELECT emp_id from tblemployees WHERE Department = '$session_depart'";
-            $query = $dbh->prepare($sql);
-            $query->execute();
-            $empcount = $query->rowCount();
-            ?>
-            <div class="d-flex flex-wrap">
-              <div class="widget-data">
-                <div class="weight-700 font-24 text-dark"><?php echo $empcount; ?></div>
-                <div class="font-14 text-secondary weight-500">Total Faculty in Department <br><br></div>
-              </div>
-              <div class="widget-icon">
-                <div class="icon" data-color="#00eccf"><i class="icon-copy dw dw-user-2"></i></div>
-              </div>
-            </div>
-          </div>
-        </div>   
+				<div class="col-xl-3 col-lg-3 col-md-6 mb-20">
+					<div class="card-box height-100-p widget-style3">
+						<?php
+						$sql = "SELECT emp_id from tblemployees WHERE Department = '$session_depart'";
+						$query = $dbh->prepare($sql);
+						$query->execute();
+						$empcount = $query->rowCount();
+						?>
+						<div class="d-flex flex-wrap">
+							<div class="widget-data">
+								<div class="weight-700 font-24 text-dark"><?php echo $empcount; ?></div>
+								<div class="font-14 text-secondary weight-500">Total Faculty in Department <br><br></div>
+							</div>
+							<div class="widget-icon">
+								<div class="icon" data-color="#00eccf"><i class="icon-copy dw dw-user-2"></i></div>
+							</div>
+						</div>
+					</div>
+				</div>
 
-        <div class="col-xl-3 col-lg-3 col-md-6 mb-20">
-          <div class="card-box height-100-p widget-style3">
-            <?php
-            $status = 1;
-            $sql = "SELECT id from tblleaves WHERE Status = :status AND empid IN (SELECT emp_id FROM tblemployees WHERE Department = '$session_depart')";
-            $query = $dbh->prepare($sql);
-            $query->bindParam(':status', $status, PDO::PARAM_STR);
-            $query->execute();
-            $approvedLeaveCount = $query->rowCount();
-            ?>
-            <div class="d-flex flex-wrap">
-              <div class="widget-data">
-                <div class="weight-700 font-24 text-dark"><?php echo $approvedLeaveCount; ?></div>
-                <div class="font-14 text-secondary weight-500">Approved Leave <br><br></div>
-              </div>
-              <div class="widget-icon">
-                <div class="icon" data-color="#09cc06"><span class="icon-copy fa fa-hourglass"></span></div>
-              </div>
-            </div>
-          </div>
-        </div>
+				<div class="col-xl-3 col-lg-3 col-md-6 mb-20">
+					<div class="card-box height-100-p widget-style3">
+						<?php
+						$status = 1;
+						$sql = "SELECT id from tblleaves WHERE Status = :status AND empid IN (SELECT emp_id FROM tblemployees WHERE Department = '$session_depart')";
+						$query = $dbh->prepare($sql);
+						$query->bindParam(':status', $status, PDO::PARAM_STR);
+						$query->execute();
+						$approvedLeaveCount = $query->rowCount();
+						?>
+						<div class="d-flex flex-wrap">
+							<div class="widget-data">
+								<div class="weight-700 font-24 text-dark"><?php echo $approvedLeaveCount; ?></div>
+								<div class="font-14 text-secondary weight-500">Approved Leave <br> <br><br></div>
+							</div>
+							<div class="widget-icon">
+								<div class="icon" data-color="#09cc06"><span class="icon-copy fa fa-hourglass"></span></div>
+							</div>
+						</div>
+					</div>
+				</div>
 
-        <div class="col-xl-3 col-lg-3 col-md-6 mb-20">
-          <div class="card-box height-100-p widget-style3">
-            <?php
-            $status = 0;
-            $sql = "SELECT id from tblleaves WHERE Status = :status AND empid IN (SELECT emp_id FROM tblemployees WHERE Department = '$session_depart')";
-            $query = $dbh->prepare($sql);
-            $query->bindParam(':status', $status, PDO::PARAM_STR);
-            $query->execute();
-            $pendingLeaveCount = $query->rowCount();
-            ?>
-            <div class="d-flex flex-wrap">
-              <div class="widget-data">
-                <div class="weight-700 font-24 text-dark"><?php echo $pendingLeaveCount; ?></div>
-                <div class="font-14 text-secondary weight-500">Pending Leave <br><br></div>
-              </div>
-              <div class="widget-icon">
-                <div class="icon"><i class="icon-copy fa fa-hourglass-end" aria-hidden="true"></i></div>
-              </div>
-            </div>
-          </div>
-        </div>
+				<div class="col-xl-3 col-lg-3 col-md-6 mb-20">
+					<div class="card-box height-100-p widget-style3">
+						<?php
+						$status = 0;
+						$sql = "SELECT id from tblleaves WHERE Status = :status AND empid IN (SELECT emp_id FROM tblemployees WHERE Department = '$session_depart')";
+						$query = $dbh->prepare($sql);
+						$query->bindParam(':status', $status, PDO::PARAM_STR);
+						$query->execute();
+						$pendingLeaveCount = $query->rowCount();
+						?>
+						<div class="d-flex flex-wrap">
+							<div class="widget-data">
+								<div class="weight-700 font-24 text-dark"><?php echo $pendingLeaveCount; ?></div>
+								<div class="font-14 text-secondary weight-500">Pending Leave <br><br> <br></div>
+							</div>
+							<div class="widget-icon">
+								<div class="icon"><i class="icon-copy fa fa-hourglass-end" aria-hidden="true"></i></div>
+							</div>
+						</div>
+					</div>
+				</div>
 
-        <div class="col-xl-3 col-lg-3 col-md-6 mb-20">
-          <div class="card-box height-100-p widget-style3">
-            <?php
-            $status = 2;
-            $sql = "SELECT id from tblleaves WHERE Status = :status AND empid IN (SELECT emp_id FROM tblemployees WHERE Department = '$session_depart')";
-            $query = $dbh->prepare($sql);
-            $query->bindParam(':status', $status, PDO::PARAM_STR);
-            $query->execute();
-            $rejectedLeaveCount = $query->rowCount();
-            ?>
-            <div class="d-flex flex-wrap">
-              <div class="widget-data">
-                <div class="weight-700 font-24 text-dark"><?php echo $rejectedLeaveCount; ?></div>
-                <div class="font-14 text-secondary weight-500">Rejected Leave <br><br></div>
-              </div>
-              <div class="widget-icon">
-                <div class="icon" data-color="#ff5b5b"><i class="icon-copy fa fa-hourglass-o" aria-hidden="true"></i></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+				<div class="col-xl-3 col-lg-3 col-md-6 mb-20">
+					<div class="card-box height-100-p widget-style3">
+						<?php
+						$status = 2;
+						$sql = "SELECT id from tblleaves WHERE Status = :status AND empid IN (SELECT emp_id FROM tblemployees WHERE Department = '$session_depart')";
+						$query = $dbh->prepare($sql);
+						$query->bindParam(':status', $status, PDO::PARAM_STR);
+						$query->execute();
+						$rejectedLeaveCount = $query->rowCount();
+						?>
+						<div class="d-flex flex-wrap">
+							<div class="widget-data">
+								<div class="weight-700 font-24 text-dark"><?php echo $rejectedLeaveCount; ?></div>
+								<div class="font-14 text-secondary weight-500">Rejected Leave <br><br> <br></div>
+							</div>
+							<div class="widget-icon">
+								<div class="icon" data-color="#ff5b5b"><i class="icon-copy fa fa-hourglass-o" aria-hidden="true"></i></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 
 
 
@@ -198,7 +198,7 @@ if (isset($_GET['delete'])) {
 						</tbody>
 					</table>
 					<div class="weight-500 col-md-6">
-						<div class="form-group">
+						<div class="form-group ">
 							<label></label>
 							<div class="modal-footer justify-content-center">
 

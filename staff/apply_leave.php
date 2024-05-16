@@ -155,7 +155,7 @@ if (isset($_POST['apply'])) {
 										</div>
 										<div class="col-md-6 col-sm-12">
 											<div class="form-group">
-												<label>Available Leave Days </label>
+												<label>Available Balance </label>
 												<input name="leave_days" type="text" class="form-control" required="true" autocomplete="off" readonly value="<?php echo $row['Av_leave']; ?>">
 											</div>
 										</div>
@@ -249,7 +249,7 @@ if (isset($_POST['apply'])) {
 									</div>
 									<div class="clearfix">
 
-										<h6 class="text-blue h4">Load balance(Write null or none if there is no another load to balance)</h6>
+										<h6 class="text-blue h4">Load Balance(Write null or none if there is no another load to balance)</h6>
 										<p class="mb-20"></p>
 
 									</div>

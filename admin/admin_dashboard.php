@@ -327,7 +327,7 @@
 											<span style="color: red">Rejected</span>
 										<?php }
 										if ($stats == 0) { ?>
-											<span class="text-warning">Pending</span>
+											<span style="color: blue">Pending</span>
 										<?php } ?>
 									</td>
 									<td>

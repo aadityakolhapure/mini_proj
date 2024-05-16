@@ -260,10 +260,10 @@ if (isset($_POST['update'])) {
 												<?php $stats = $result->Status; ?>
 												<?php
 												if ($stats == 1) : ?>
-													<input type="text" style="color: green;" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo "Approved"; ?>">
+													<input type="text" style="color: green;" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo "Recommend"; ?>">
 												<?php
 												elseif ($stats == 2) : ?>
-													<input type="text" style="color: red; font-size: 16px;" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo "Rejected"; ?>">
+													<input type="text" style="color: red; font-size: 16px;" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo "Not Recommend"; ?>">
 												<?php
 												else : ?>
 													<input type="text" style="color: blue;" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo "Pending"; ?>">
@@ -276,7 +276,7 @@ if (isset($_POST['update'])) {
 												<?php $ad_stats = $result->admin_status; ?>
 												<?php
 												if ($ad_stats == 1) : ?>
-													<input type="text" style="color: green;" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo "Approved"; ?>">
+													<input type="text" style="color: green;" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo "Forwarded"; ?>">
 												<?php
 												elseif ($ad_stats == 2) : ?>
 													<input type="text" style="color: red; font-size: 16px;" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo "Rejected"; ?>">
@@ -305,7 +305,7 @@ if (isset($_POST['update'])) {
 										<div class="row" style="display: flex; flex-direction:column; padding-left: 10px">
 
 											<div class="pd-20">
-												<h2 class="text-blue h4">Load Management</h2>
+												<h2 class="text-blue h4">Load Adjustment</h2>
 											</div>
 											<div class="pb-10">
 												<table class="data-table table">

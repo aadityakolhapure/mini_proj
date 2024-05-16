@@ -214,6 +214,14 @@
                 <button type="reset" onclick="popup('instru-popup')">X</button>
             </h2>
             <span>
+                1. A new user should contact the administrator for their registration which will include you login details. <br>
+                2. After login for first time the user should fill his personal details and required document. <br>
+                3. Name the file in proper way. <br>
+                4. Password can be reset by entering email and new password. <br>
+                5. Enter none in case there is nothing to enter.
+
+            </span>
+            <span>
 
             </span>
         </div>

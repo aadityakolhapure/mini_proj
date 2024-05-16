@@ -7,7 +7,7 @@ if (isset($_GET['delete'])) {
 	$result = mysqli_query($conn, $sql);
 	if ($result) {
 		echo "<script>alert('Faculty deleted Successfully');</script>";
-		echo "<script type='text/javascript'> document.location = 'staff.php'; </script>";
+		echo "<script type='text/javascript'> document.location = 'all_emp.php'; </script>";
 	}
 }
 

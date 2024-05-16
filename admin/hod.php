@@ -7,7 +7,7 @@ if (isset($_GET['delete'])) {
 	$result = mysqli_query($conn, $sql);
 	if ($result) {
 		echo "<script>alert('Faculty deleted Successfully');</script>";
-		echo "<script type='text/javascript'> document.location = 'staff.php'; </script>";
+		echo "<script type='text/javascript'> document.location = 'hod.php'; </script>";
 	}
 }
 
@@ -174,7 +174,7 @@ if (isset($_GET['delete'])) {
 											
 												<a class="dropdown-item" href="document.php?edit=<?php echo $row['emp_id']; ?>"><i class="dw dw-edit2"></i>View Document</a>
 
-												<a class="dropdown-item" href="staff.php?delete=<?php echo $row['emp_id'] ?>"><i class="dw dw-delete-3"></i> Delete</a>
+												<a class="dropdown-item" href="hod.php?delete=<?php echo $row['emp_id'] ?>"><i class="dw dw-delete-3"></i> Delete</a>
 											</div>
 										</div>
 									</td>

@@ -305,7 +305,7 @@ if (isset($_POST['update'])) {
 										<div class="row" style="display: flex; flex-direction:column; padding-left: 10px">
 
 											<div class="pd-20">
-												<h2 class="text-blue h4">Load Management</h2>
+												<h2 class="text-blue h4">Load Adjustment</h2>
 											</div>
 											<div class="pb-10">
 												<table class="data-table table">

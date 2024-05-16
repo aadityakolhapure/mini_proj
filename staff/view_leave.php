@@ -141,7 +141,7 @@
 										</div>
 										<div class="col-md-4 col-sm-12">
 											<div class="form-group">
-												<label style="font-size:16px;"><b>Available No. of Days</b></label>
+												<label style="font-size:16px;"><b>Available Balance</b></label>
 												<input type="text" class="selectpicker form-control" data-style="btn-outline-info" readonly value="<?php echo htmlentities($result->Av_leave); ?>">
 											</div>
 										</div>
@@ -178,10 +178,10 @@
 										<label style="font-size:16px;" class="col-sm-12 col-md-2 col-form-label"><b>Principal Remarks</b></label>
 										<div class="col-sm-12 col-md-10">
 											<?php
-											if ($result_prin->principalRemark == "") : ?>
+											if ($result->principal_remark == "") : ?>
 												<input type="text" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo "Waiting for Approval"; ?>">
 											<?php else : ?>
-												<input type="text" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo htmlentities($result_prin->principalRemark); ?>">
+												<input type="text" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo htmlentities($result->principal_remark); ?>">
 											<?php endif ?>
 										</div>
 									</div>
@@ -258,7 +258,7 @@
 										<div class="row" style="display: flex; flex-direction:column; padding-left: 10px">
 
 											<div class="pd-20">
-												<h2 class="text-blue h4">Load Management</h2>
+												<h2 class="text-blue h4">Load Balance</h2>
 											</div>
 											<div class="pb-10">
 												<table class="data-table table">
@@ -304,8 +304,8 @@
 										// Principal status is approved, show the print button
 									?>
 										<div class="row">
-											<button style="height: 30px; width: 80px;">
-												<a title="VIEW" href="leave_application.php?edit=<?php echo htmlentities($result->lid); ?>" data-color="#265ed7">
+											<button style="border-radius: 5px; padding: 10px; background-color:#9c94db; width:95px; ">
+												<a title="VIEW" href="leave_application.php?edit=57"  style="color: rgb(0 0 0);">
 													Print
 												</a>
 											</button>

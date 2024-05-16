@@ -2,7 +2,7 @@
 // Check if the 'export' button was clicked
 if (isset($_POST['export'])) {
     // Establish database connection
-    $conn = mysqli_connect('localhost', 'root', '', 'project') or die(mysqli_error());
+    $conn = mysqli_connect('localhost', 'root', '', 'mini_project') or die(mysqli_error());
 
     // SQL query to select data from your table
     $sql = "SELECT tblleaves.id as leave_id, tblemployees.FirstName, tblemployees.LastName, tblleaves.LeaveType, tblleaves.PostingDate, tblleaves.Status as hod_status, tblleaves.admin_status, tblleaves.principal_status FROM tblleaves INNER JOIN tblemployees ON tblleaves.empid = tblemployees.emp_id";

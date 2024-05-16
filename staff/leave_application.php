@@ -100,7 +100,7 @@
 			?>
 		</div>
 		<hr>
-		<h4 id="title">Leave Application form</h4>
+		<h4 id="title">Leave Application Form</h4>
 		<div class="header2">
 			<div class="gree">
 				<span>To,</span><br>
@@ -119,7 +119,7 @@
 		<div class="header4">
 			<table>
 				<tr>
-					<td>department: <?php echo htmlentities($result->Department); ?></td>
+					<td>Department: <?php echo htmlentities($result->Department); ?></td>
 				</tr>
 			</table>
 			<table>
@@ -131,7 +131,7 @@
 			</table>
 			<table>
 				<td>
-					No. of days:
+					Nos. of days:
 					<?php echo htmlentities($result->num_days); ?>
 				</td>
 				<td>
@@ -181,7 +181,7 @@
 					<td><?php echo htmlentities($result->alternative_faculty); ?></td>
 					<td></td>
 				</tr>
-				<tr>
+				<!-- <tr>
 					<td>3.</td>
 					<td></td>
 					<td></td>
@@ -198,7 +198,7 @@
 					<td></td>
 					<td></td>
 					<td></td>
-				</tr>
+				</tr> -->
 			</table>
 			<table>
 				<td>
