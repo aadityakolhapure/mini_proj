@@ -304,11 +304,11 @@
 										// Principal status is approved, show the print button
 									?>
 										<div class="row">
-											<button style="border-radius: 5px; padding: 10px; background-color:#9c94db; width:95px; ">
-												<a title="VIEW" href="leave_application.php?edit=57"  style="color: rgb(0 0 0);">
-													Print
-												</a>
-											</button>
+											<button style="height: 30px; width: 80px;">
+											<a title="VIEW" href="leave_application.php?edit=<?php echo htmlentities($result->lid); ?>" data-color="#265ed7">
+												Print</i>
+											</a>
+										</button>
 										</div>
 									<?php
 									}

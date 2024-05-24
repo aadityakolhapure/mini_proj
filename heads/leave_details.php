@@ -2,6 +2,14 @@
 <?php include('../includes/session.php') ?>
 
 <?php
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+//Load Composer's autoloader
+require '../vendor/autoload.php';
+
 // code for update the read notification status
 $isread = 1;
 $did = intval($_GET['leaveid']);
@@ -21,6 +29,33 @@ if (isset($_POST['update'])) {
 	$av_leave = $_POST['av_leave'];
 	$num_days = $_POST['num_days'];
 
+
+	// Fetch leave history
+	$sql = "SELECT * FROM tblleaves WHERE empid = (SELECT empid FROM tblleaves WHERE id = :did)";
+	$query = $dbh->prepare($sql);
+	$query->bindParam(':did', $did, PDO::PARAM_STR);
+	$query->execute();
+	$leaveHistory = $query->fetchAll(PDO::FETCH_OBJ);
+
+	// Format leave history
+	$leaveHistoryContent = "";
+	foreach ($leaveHistory as $leave) {
+		$leaveHistoryContent .= "Leave Type: " . htmlentities($leave->LeaveType) . "\n";
+		$leaveHistoryContent .= "From: " . htmlentities($leave->FromDate) . " To: " . htmlentities($leave->ToDate) . "\n";
+		$leaveHistoryContent .= "Description: " . htmlentities($leave->Description) . "\n";
+	}
+
+	$adminQuery = mysqli_query($conn, "SELECT EmailId FROM tblemployees WHERE Role = 'Admin'");
+	$adminRow = mysqli_fetch_assoc($adminQuery);
+	$adminEmail = $adminRow['EmailId'];
+
+	$sql = "SELECT FirstName, LastName FROM tblemployees WHERE emp_id = (SELECT empid FROM tblleaves WHERE id = :did)";
+	$query = $dbh->prepare($sql);
+	$query->bindParam(':did', $did, PDO::PARAM_STR);
+	$query->execute();
+	$employeeResult = $query->fetch(PDO::FETCH_ASSOC);
+	$employeeName = $employeeResult['FirstName'] . ' ' . $employeeResult['LastName'];
+
 	// $REMLEAVE = $av_leave - $num_days;
 	$reg_remarks = 'Leave was Rejected. Admin will not see it';
 	$reg_status = 2;
@@ -39,7 +74,37 @@ if (isset($_POST['update'])) {
 		$result = mysqli_query($conn, "update tblleaves, tblemployees set tblleaves.AdminRemark='$description',tblleaves.Status='$status',tblleaves.AdminRemarkDate='$admremarkdate' where tblleaves.empid = tblemployees.emp_id AND tblleaves.id='$did'");
 
 		if ($result) {
-			echo "<script>alert('Leave updated Successfully');</script>";
+			// echo "<script>alert('Leave updated Successfully');</script>";
+
+
+			//Create an instance; passing `true` enables exceptions
+			$mail = new PHPMailer(true);
+
+			//Server settings
+			$mail->SMTPDebug = SMTP::DEBUG_SERVER;
+			$mail->SMTPDebug = 0; //Enable verbose debug output
+			$mail->isSMTP(); //Send using SMTP
+			$mail->Host = 'smtp.gmail.com'; //Set the SMTP server to send through
+			$mail->SMTPAuth = true; //Enable SMTP authentication
+			$mail->Username = 'aadityakolhapure28@gmail.com'; //SMTP username
+			$mail->Password = 'rsyiovsdcybbxmjy'; //SMTP password  
+			$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; //Enable implicit TLS encryption
+			$mail->Port = 465; //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+			//Recipients
+			$mail->setFrom('aadityakolhapure28@gmail.com', 'Leave Management System');
+			$mail->addAddress($adminEmail, 'Admin'); //Add HOD's email as recipient
+			$mail->addReplyTo('aadityakolhapure28@gmail.com', 'Leave Management System');
+
+			//Content
+			$mail->isHTML(true); //Set email format to HTML
+			$mail->Subject = 'Leave Application Notification';
+			$mail->Body = "A leave application has been recommended by the HOD for " . $employeeName . ". Please review it.\n\nLeave History:\n" . $leaveHistoryContent;
+			if ($mail->send()) {
+				echo "<script>alert('Leave Application was successful. Email sent to Admin.');</script>";
+			} else {
+				echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+			}
 		} else {
 			die(mysqli_error());
 		}

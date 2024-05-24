@@ -1,6 +1,16 @@
-<?php include('includes/header.php') ?>
-<?php include('../includes/session.php') ?>
+<?php include('includes/header.php'); ?>
+<?php include('../includes/session.php'); ?>
+
 <?php
+//Import PHPMailer classes into the global namespace
+//These must be at the top of your script, not inside a function
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+//Load Composer's autoloader
+require '../vendor/autoload.php';
+
 if (isset($_POST['apply'])) {
 	$empid = $session_id;
 	$leave_type = $_POST['leave_type'];
@@ -12,16 +22,14 @@ if (isset($_POST['apply'])) {
 	$leave_days = $_POST['leave_days'];
 	$datePosting = date("Y-m-d");
 
+	// Validate dates
 	if ($fromdate > $todate) {
 		echo "<script>alert('End Date should be greater than Start Date');</script>";
-	} elseif ($leave_days <= 0) {
-		echo "<script>alert('YOU HAVE EXCEEDED YOUR LEAVE LIMIT. LEAVE APPLICATION FAILED');</script>";
 	} else {
-
+		// Calculate number of days
 		$DF = date_create($_POST['date_from']);
 		$DT = date_create($_POST['date_to']);
-
-		$diff =  date_diff($DF, $DT);
+		$diff = date_diff($DF, $DT);
 		$num_days = (1 + $diff->format("%a"));
 		$dateA = date("Y-m-d");
 		// Assuming 'dateA' should be the current date
@@ -33,45 +41,117 @@ if (isset($_POST['apply'])) {
 		$date1 = $_POST['date1'];
 
 		$existing_load = $_POST['existing_load']; // Assuming 'existing_loadA' is coming from the form
-		$schedule_time = $_POST['schedule_time']; // Assuming 'existing_loadA' is coming from the form
-		$class = $_POST['class']; // Assuming 'existing_loadA' is coming from the form
-		$alternative_faculty = $_POST['alternative_faculty']; // Assuming 'existing_loadA' is coming from the form
+		$schedule_time = $_POST['schedule_time']; // Assuming
 
+		// Check if the requested leave days exceed the available balance
+		$query = mysqli_query($conn, "SELECT Av_leave FROM tblemployees WHERE emp_id = '$session_id'");
+		$row = mysqli_fetch_assoc($query);
+		$available_leave = $row['Av_leave'];
 
-		$sql = "INSERT INTO tblleaves(LeaveType,ToDate,FromDate,Description,Status,IsRead,empid,num_days,PostingDate,dateA,existing_loadA,schedule_timeA,classA,alternative_facultyA,date1,existing_load,schedule_time,class,alternative_faculty) VALUES(:leave_type,:fromdate,:todate,:description,:status,:isread,:empid,:num_days,:datePosting,:dateA,:existing_loadA,:schedule_timeA,:classA,:alternative_facultyA,:date1,:existing_load,:schedule_time,:class,:alternative_faculty)";
-
-		$query = $dbh->prepare($sql);
-		$query->bindParam(':leave_type', $leave_type, PDO::PARAM_STR);
-		$query->bindParam(':fromdate', $fromdate, PDO::PARAM_STR);
-		$query->bindParam(':todate', $todate, PDO::PARAM_STR);
-		$query->bindParam(':description', $description, PDO::PARAM_STR);
-		$query->bindParam(':status', $status, PDO::PARAM_STR);
-		$query->bindParam(':isread', $isread, PDO::PARAM_STR);
-		$query->bindParam(':empid', $empid, PDO::PARAM_STR);  
-		$query->bindParam(':num_days', $num_days, PDO::PARAM_STR);
-		$query->bindParam(':datePosting', $datePosting, PDO::PARAM_STR);
-		$query->bindParam(':dateA', $dateA, PDO::PARAM_STR);
-		$query->bindParam(':existing_loadA', $existing_loadA, PDO::PARAM_STR);
-		$query->bindParam(':schedule_timeA', $schedule_timeA, PDO::PARAM_STR);
-		$query->bindParam(':classA', $classA, PDO::PARAM_STR);
-		$query->bindParam(':alternative_facultyA', $alternative_facultyA, PDO::PARAM_STR);
-		$query->bindParam(':date1', $date1, PDO::PARAM_STR);
-		$query->bindParam(':existing_load', $existing_load, PDO::PARAM_STR);
-		$query->bindParam(':schedule_time', $schedule_time, PDO::PARAM_STR);
-		$query->bindParam(':class', $class, PDO::PARAM_STR);
-		$query->bindParam(':alternative_faculty', $alternative_faculty, PDO::PARAM_STR);
-		$query->execute();
-		$lastInsertId = $dbh->lastInsertId();
-		if ($lastInsertId) {
-			echo "<script>alert('Leave Application was successful.');</script>";
-			echo "<script type='text/javascript'> document.location = 'leave_history.php'; </script>";
+		if ($num_days > $available_leave) {
+			echo "<script>alert('YOU HAVE EXCEEDED YOUR LEAVE LIMIT. LEAVE APPLICATION FAILED');</script>";
 		} else {
-			echo "<script>alert('Something went wrong. Please try again');</script>";
+			$dateA = date("Y-m-d");
+			// Assuming 'dateA' should be the current date
+			$existing_loadA = $_POST['existing_loadA']; // Assuming 'existing_loadA' is coming from the form
+			$schedule_timeA = $_POST['schedule_timeA']; // Assuming 'existing_loadA' is coming from the form
+			$classA = $_POST['classA']; // Assuming 'existing_loadA' is coming from the form
+			$alternative_facultyA = $_POST['alternative_facultyA'];
+			$existing_loadA = $_POST['existing_loadA']; // Assuming 'existing_loadA' is coming from the form
+			$date1 = $_POST['date1'];
+
+			$existing_load = $_POST['existing_load']; // Assuming 'existing_loadA' is coming from the form
+			$schedule_time = $_POST['schedule_time']; // Assuming 'existing_loadA' is coming from the form
+			$class = $_POST['class']; // Assuming 'existing_loadA' is coming from the form
+			$alternative_faculty = $_POST['alternative_faculty']; // Assuming 'existing_loadA' is coming from the form
+
+
+			$sql = "INSERT INTO tblleaves(LeaveType,ToDate,FromDate,Description,Status,IsRead,empid,num_days,PostingDate,dateA,existing_loadA,schedule_timeA,classA,alternative_facultyA,date1,existing_load,schedule_time,class,alternative_faculty) VALUES(:leave_type,:fromdate,:todate,:description,:status,:isread,:empid,:num_days,:datePosting,:dateA,:existing_loadA,:schedule_timeA,:classA,:alternative_facultyA,:date1,:existing_load,:schedule_time,:class,:alternative_faculty)";
+
+			$query = $dbh->prepare($sql);
+			$query->bindParam(':leave_type', $leave_type, PDO::PARAM_STR);
+			$query->bindParam(':fromdate', $fromdate, PDO::PARAM_STR);
+			$query->bindParam(':todate', $todate, PDO::PARAM_STR);
+			$query->bindParam(':description', $description, PDO::PARAM_STR);
+			$query->bindParam(':status', $status, PDO::PARAM_STR);
+			$query->bindParam(':isread', $isread, PDO::PARAM_STR);
+			$query->bindParam(':empid', $empid, PDO::PARAM_STR);
+			$query->bindParam(':num_days', $num_days, PDO::PARAM_STR);
+			$query->bindParam(':datePosting', $datePosting, PDO::PARAM_STR);
+			$query->bindParam(':dateA', $dateA, PDO::PARAM_STR);
+			$query->bindParam(':existing_loadA', $existing_loadA, PDO::PARAM_STR);
+			$query->bindParam(':schedule_timeA', $schedule_timeA, PDO::PARAM_STR);
+			$query->bindParam(':classA', $classA, PDO::PARAM_STR);
+			$query->bindParam(':alternative_facultyA', $alternative_facultyA, PDO::PARAM_STR);
+			$query->bindParam(':date1', $date1, PDO::PARAM_STR);
+			$query->bindParam(':existing_load', $existing_load, PDO::PARAM_STR);
+			$query->bindParam(':schedule_time', $schedule_time, PDO::PARAM_STR);
+			$query->bindParam(':class', $class, PDO::PARAM_STR);
+			$query->bindParam(':alternative_faculty', $alternative_faculty, PDO::PARAM_STR);
+			$query->execute();
+			$lastInsertId = $dbh->lastInsertId();
+
+
+			if ($lastInsertId) {
+				// Fetch department, HOD's email, and employee name
+				$deptQuery = mysqli_query($conn, "SELECT Department FROM tblemployees WHERE emp_id = '$session_id'");
+				$deptRow = mysqli_fetch_assoc($deptQuery);
+				$department = $deptRow['Department'];
+
+				$hodQuery = mysqli_query($conn, "SELECT EmailId FROM tblemployees WHERE Department = '$department' AND Role = 'HOD'");
+				$hodRow = mysqli_fetch_assoc($hodQuery);
+				$hodEmail = $hodRow['EmailId'];
+
+				$employee_query = mysqli_query($conn, "SELECT FirstName, LastName FROM tblemployees WHERE emp_id = '$session_id'");
+				$employee_row = mysqli_fetch_assoc($employee_query);
+				$employee_name = $employee_row['FirstName'] . " " . $employee_row['LastName'];
+
+				try {
+					//Create an instance; passing `true` enables exceptions
+					$mail = new PHPMailer(true);
+
+					//Server settings
+					$mail->SMTPDebug = SMTP::DEBUG_SERVER;
+					$mail->SMTPDebug = 0; //Enable verbose debug output
+					$mail->isSMTP(); //Send using SMTP
+					$mail->Host = 'smtp.gmail.com'; //Set the SMTP server to send through
+					$mail->SMTPAuth = true; //Enable SMTP authentication
+					$mail->Username = 'aadityakolhapure28@gmail.com'; //SMTP username
+					$mail->Password = 'rsyiovsdcybbxmjy'; //SMTP password
+					$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; //Enable implicit TLS encryption
+					$mail->Port = 465; //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+					//Recipients
+					$mail->setFrom('aadityakolhapure28@gmail.com', 'Leave Management System');
+					$mail->addAddress($hodEmail, 'HOD'); //Add HOD's email as recipient
+					$mail->addReplyTo('aadityakolhapure28@gmail.com', 'Leave Management System');
+
+					//Content
+					$mail->isHTML(true); //Set email format to HTML
+					$mail->Subject = 'Leave Application Notification';
+					$mail->Body = "Dear HOD,<br><br>A leave application has been submitted by " . $employee_name . ".<br><br>Leave Type: " . $leave_type . "<br>From: " . $fromdate . "<br>To: " . $todate . "<br>Reason: " . $description . "<br><br>Please review the application.<br><br>Best Regards,<br>Leave Management System";
+
+					$mail->send();
+					echo "<script>alert('Leave Application was successful. Email sent to HOD.');</script>";
+				} catch (Exception $e) {
+					echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+				}
+
+				echo "<script type='text/javascript'> document.location = 'leave_history.php'; </script>";
+			} else {
+				echo "<script>alert('Something went wrong. Please try again');</script>";
+			}
 		}
 	}
 }
-
 ?>
+
+<body>
+	<!-- HTML code for the leave application form -->
+</body>
+
+<!-- HTML code -->
+
 
 <body>
 	<div class="pre-loader">

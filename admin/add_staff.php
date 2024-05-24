@@ -1,45 +1,83 @@
 <?php include('includes/header.php') ?>
 <?php include('../includes/session.php') ?>
+
 <?php
+//Import PHPMailer classes into the global namespace
+//These must be at the top of your script, not inside a function
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+//Load Composer's autoloader
+require '../vendor/autoload.php';
+
 if (isset($_POST['add_staff'])) {
 
-	$fname = $_POST['firstname'];
-	$lname = $_POST['lastname'];
-	$email = $_POST['email'];
-	$password = md5($_POST['password']);
-	$gender = $_POST['gender'];
-	$dob = $_POST['dob'];
-	$department = $_POST['department'];
-	$address = $_POST['address'];
-	$leave_days = $_POST['leave_days'];
-	$emp = $_POST['emp'];
-	$user_role = $_POST['user_role'];
-	$phonenumber = $_POST['phonenumber'];
-	$status = 1;
+    $fname = $_POST['firstname'];
+    $lname = $_POST['lastname'];
+    $email = $_POST['email'];
+    $password = md5($_POST['password']);
+    $gender = $_POST['gender'];
+    $dob = $_POST['dob'];
+    $department = $_POST['department'];
+    $address = $_POST['address'];
+    $leave_days = $_POST['leave_days'];
+    $emp = $_POST['emp'];
+    $user_role = $_POST['user_role'];
+    $phonenumber = $_POST['phonenumber'];
+    $status = 1;
 
-	$query = mysqli_query($conn, "select * from tblemployees where EmailId = '$email'") or die(mysqli_error());
-	$count = mysqli_num_rows($query);
+    $query = mysqli_query($conn, "select * from tblemployees where EmailId = '$email'") or die(mysqli_error());
+    $count = mysqli_num_rows($query);
 
-	if ($count > 0) { ?>
-		<script>
-			alert('Data Already Exist');
-		</script>
-	<?php
-	} else {
-		mysqli_query($conn, "INSERT INTO tblemployees(FirstName,LastName,EmailId,Password,Gender,Dob,Department,Address,Av_leave,role,Phonenumber,Status,emp, location) VALUES('$fname','$lname','$email','$password','$gender','$dob','$department','$address','$leave_days','$user_role','$phonenumber','$status','$emp', 'NO-IMAGE-AVAILABLE.jpg')         
-		") or die(mysqli_error()); ?>
-		
-		$mail->send();
-		<script>
-			alert('Faculty Records Successfully  Added');
-		</script>;
-		<script>
-			window.location = "staff.php";
-		</script>
-<?php   }
+    if ($count > 0) { ?>
+        <script>
+            alert('Data Already Exist');
+        </script>
+    <?php
+    } else {
+        mysqli_query($conn, "INSERT INTO tblemployees(FirstName,LastName,EmailId,Password,Gender,Dob,Department,Address,Av_leave,role,Phonenumber,Status,emp, location) VALUES('$fname','$lname','$email','$password','$gender','$dob','$department','$address','$leave_days','$user_role','$phonenumber','$status','$emp', 'NO-IMAGE-AVAILABLE.jpg')") or die(mysqli_error());
+
+        try {
+            //Create an instance; passing `true` enables exceptions
+            $mail = new PHPMailer(true);
+
+            //Server settings
+            $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+            $mail->SMTPDebug = 0;                       //Enable verbose debug output
+            $mail->isSMTP();                                            //Send using SMTP
+            $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+            $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+            $mail->Username   = 'aadityakolhapure28@gmail.com';                     //SMTP username
+            $mail->Password   = 'rsyiovsdcybbxmjy';                               //SMTP password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+            $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+            //Recipients
+            $mail->setFrom('aadityakolhapure28@gmail.com', 'Dnyanshree Institute');
+            $mail->addAddress($email, 'Faculty');     //Add a recipient
+            $mail->addReplyTo('aadityakolhapure28@gmail.com', 'Information');
+
+            //Attachments
+            // $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
+            // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+
+            $fullName = $fname . " " . $lname;
+
+            //Content
+            $mail->isHTML(true);                                  //Set email format to HTML
+            $mail->Subject = 'Welcome message';
+            $mail->Body    = 'Welcome, ' . $fullName . ' to Dnyanshree Institute of Engineering and Technology. Your registered email id is ' . $email . '.';
+
+            $mail->send();
+            echo 'Message has been sent';
+        } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
+    }
 }
-
 ?>
+
 
 <body>
 	<div class="pre-loader">
@@ -195,63 +233,7 @@ if (isset($_POST['add_staff'])) {
 											</select>
 										</div>
 									</div>
-									<?php
-									//Import PHPMailer classes into the global namespace
-									//These must be at the top of your script, not inside a function
-									// include('includes/config.php');
-									use PHPMailer\PHPMailer\PHPMailer;
-									use PHPMailer\PHPMailer\SMTP;
-									use PHPMailer\PHPMailer\Exception;
-
-									//Load Composer's autoloader
-									require '../vendor/autoload.php';
-
-									//Create an instance; passing `true` enables exceptions
-									$mail = new PHPMailer(true);
-									if (isset($_POST['add_staff'])) {
-
-										try {
-											//Server settings
-											$mail->SMTPDebug = SMTP::DEBUG_SERVER;
-											$mail->SMTPDebug = 0;                       //Enable verbose debug output
-											$mail->isSMTP();                                            //Send using SMTP
-											$mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
-											$mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-											$mail->Username   = 'aadityakolhapure28@gmail.com';                     //SMTP username
-											$mail->Password   = 'rsyiovsdcybbxmjy';                               //SMTP password
-											$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-											$mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-
-											//Recipients
-											$mail->setFrom('aadityakolhapure28@gmail.com', 'Dnyanshree Institute');
-											$sql1 = "SELECT * FROM tblemployees";
-											$result1 = mysqli_query($conn, $sql);
-											$email = $_POST('EmailId');
-											$email->addAddress('$email', 'Faculty');     //Add a recipient
-											// $mail->addAddress('ellen@example.com');               //Name is optional
-											$mail->addReplyTo('aadityakolhapure28@gmail.com', 'Information');
-											// $mail->addCC('cc@example.com');
-											// $mail->addBCC('bcc@example.com');
-
-											//Attachments
-											// $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
-											// $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
-											$fullName -> $fname." ".$lname;
-
-											//Content
-											$mail->isHTML(true);                                  //Set email format to HTML
-											$mail->Subject = 'Welcome message';
-											$mail->Body    = 'Welcome ,$fullName To Dnyanshree Institute of ENGineering AND Technology .
-											Your registered emailid is $email.';
-
-											$mail->send();
-											echo 'Message has been sent';
-										} catch (Exception $e) {
-											echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-										}
-									}
-									?>
-
+									
 									<?php
 									if (isset($_POST['submit'])) {
 									}
