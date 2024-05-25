@@ -72,10 +72,10 @@ if (isset($_GET['emp_id'])) {
                                             <td><?php echo htmlentities($row['ToDate']); ?></td>
                                             <td><?php echo htmlentities($row['Description']); ?></td>
                                             <td style="color: <?php echo ($row['Status'] == 1) ? 'green' : (($row['Status'] == 2) ? 'red' : 'blue'); ?>">
-                                                <?php echo ($row['Status'] == 1) ? 'Recommend' : (($row['Status'] == 2) ? 'Not recommend' : 'Pending'); ?>
+                                                <?php echo ($row['Status'] == 1) ? 'Recommended' : (($row['Status'] == 2) ? 'Not recommend' : 'Pending'); ?>
                                             </td>
                                             <td style="color: <?php echo ($row['admin_status'] == 1) ? 'green' : (($row['admin_status'] == 2) ? 'red' : 'blue'); ?>">
-                                                <?php echo ($row['admin_status'] == 1) ? 'Forward' : (($row['admin_status'] == 2) ? 'Rejected' : 'Pending'); ?>
+                                                <?php echo ($row['admin_status'] == 1) ? 'Forwarded' : (($row['admin_status'] == 2) ? 'Rejected' : 'Pending'); ?>
                                             </td>
                                             <td style="color: <?php echo ($row['principal_status'] == 1) ? 'green' : (($row['principal_status'] == 2) ? 'red' : 'blue'); ?>">
                                                 <?php echo ($row['principal_status'] == 1) ? 'Approved' : (($row['principal_status'] == 2) ? 'Not Approved' : 'Pending'); ?>

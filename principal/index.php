@@ -309,7 +309,7 @@
 									<td><?php $stats = $row['admin_status'];
 										if ($stats == 1) {
 										?>
-											<span style="color: green">Forward</span>
+											<span style="color: green">Forwarded</span>
 										<?php }
 										if ($stats == 2) { ?>
 											<span style="color: red">Rejected</span>
@@ -337,7 +337,6 @@
 											</a>
 											<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
 												<a class="dropdown-item" href="leave_details.php?leaveid=<?php echo $row['lid']; ?>"><i class="dw dw-eye"></i> View</a>
-												<a class="dropdown-item" href="admin_dashboard.php?leaveid=<?php echo $row['lid']; ?>"><i class="dw dw-delete-3"></i> Delete</a>
 											</div>
 										</div>
 									</td>

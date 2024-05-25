@@ -190,10 +190,10 @@
 										<td><?php $stats = $result->Status;
 											if ($stats == 1) {
 											?>
-												<span style="color: green">Recommend</span>
+												<span style="color: green">Recommended</span>
 											<?php }
 											if ($stats == 2) { ?>
-												<span style="color: red">Not Recommend</span>
+												<span style="color: red">Not Recommended</span>
 											<?php }
 											if ($stats == 0) { ?>
 												<span style="color: blue">Pending</span>
@@ -203,7 +203,7 @@
 										<td><?php $admin_stats = $result->admin_status;
 											if ($admin_stats == 1) {
 											?>
-												<span style="color: green">Forward</span>
+												<span style="color: green">Forwarded</span>
 											<?php }
 											if ($admin_stats == 2) { ?>
 												<span style="color: red">Rejected</span>
@@ -216,7 +216,7 @@
 										<td><?php $prin_stats = $result->principal_status;
 											if ($prin_stats == 1) {
 											?>
-												<span style="color: green">Approve</span>
+												<span style="color: green">Approved</span>
 											<?php }
 											if ($prin_stats == 2) { ?>
 												<span style="color: red">Rejected</span>

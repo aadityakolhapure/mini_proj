@@ -207,9 +207,9 @@
                       <?php
                       $stats = $result->Status;
                       if ($stats == 1) {
-                        echo "<span style='color: green'>Recommend</span>";
+                        echo "<span style='color: green'>Recommended</span>";
                       } elseif ($stats == 2) {
-                        echo "<span style='color: red'>Not Recommend</span>";
+                        echo "<span style='color: red'>Not Recommended</span>";
                       } else {
                         echo "<span style='color: blue'>Pending</span>";
                       }
@@ -219,7 +219,7 @@
                       <?php
                       $admin_stats = $result->admin_status;
                       if ($admin_stats == 1) {
-                        echo "<span style='color: green'>Forward</span>";
+                        echo "<span style='color: green'>Forwarded</span>";
                       } elseif ($admin_stats == 2) {
                         echo "<span style='color: red'>Rejected</span>";
                       } else {

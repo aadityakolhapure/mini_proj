@@ -250,12 +250,7 @@ if (isset($_POST["update_image"])) {
 															</div>
 														</div>
 
-														<div class="weight-500 col-md-6">
-															<div class="form-group">
-																<label>Unique id</label>
-																<span name="emp" class="form-control form-control-lg" type="text" placeholder="" required="true" autocomplete="off"><?php echo $row['emp_id']; ?></span>
-															</div>
-														</div>
+														
 
 														<div class="weight-500 col-md-6">
 															<div class="form-group">

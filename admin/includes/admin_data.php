@@ -2,7 +2,7 @@
 // Check if the 'export' button was clicked
 if (isset($_POST['export'])) {
     // Establish database connection
-    $conn = mysqli_connect('localhost', 'root', '', 'project') or die(mysqli_error());
+    $conn = mysqli_connect('localhost', 'root', '', 'mini_project') or die(mysqli_error());
 
     // SQL query to select data from your table
     $sql = "select * from tblemployees LEFT JOIN tbldepartments ON tblemployees.Department = tbldepartments.DepartmentShortName where role = 'Admin' ORDER BY tblemployees.emp_id";

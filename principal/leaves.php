@@ -79,20 +79,20 @@ include('../includes/session.php');
 									echo "<td>" . $row['PostingDate'] . "</td>";
 									echo "<td>";
 									if ($row['hod_status'] == 1) {
-										echo "<span class='text-success'>Recommend</span>";
+										echo "<span class='text-success'>Recommended</span>";
 									} elseif ($row['hod_status'] == 2) {
-										echo "<span class='text-danger'>Not Recommend</span>";
+										echo "<span class='text-danger'>Not Recommended</span>";
 									} else {
-										echo "<span class='text-warning'>Pending</span>";
+										echo "<span class='text-primary'>Pending</span>";
 									}
 									echo "</td>";
 									echo "<td>";
 									if ($row['admin_status'] == 1) {
-										echo "<span class='text-success'>Forward</span>";
+										echo "<span class='text-success'>Forwarded</span>";
 									} elseif ($row['admin_status'] == 2) {
-										echo "<span class='text-danger'>Rejected</span>";
+										echo "<span class='text-danger'>Rejecteded</span>";
 									} else {
-										echo "<span class='text-warning'>Pending</span>";
+										echo "<span class='text-primary'>Pending</span>";
 									}
 									echo "</td>";
 									echo "<td>";
@@ -101,7 +101,7 @@ include('../includes/session.php');
 									} elseif ($row['principal_status'] == 2) {
 										echo "<span class='text-danger'>Rejected</span>";
 									} else {
-										echo "<span class='text-warning'>Pending</span>";
+										echo "<span class='text-primary'>Pending</span>";
 									}
 									echo "</td>";
 									echo "<td><a class='dropdown-item' href='leave_details.php?leaveid=" . $row['leave_id'] . "'><i class='dw dw-eye'></i> View</a></td>";

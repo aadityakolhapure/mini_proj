@@ -68,7 +68,7 @@ if (isset($_GET['delete'])) {
 
 						<?php
 						$status = 1;
-						$query = mysqli_query($conn, "select * from tblleaves where empid = '$session_id' AND Status = '$status'") or die(mysqli_error());
+						$query = mysqli_query($conn, "select * from tblleaves where empid = '$session_id' AND principal_status = '$status'") or die(mysqli_error());
 						$count_reg_staff = mysqli_num_rows($query);
 						?>
 
@@ -88,7 +88,7 @@ if (isset($_GET['delete'])) {
 
 						<?php
 						$status = 0;
-						$query_pend = mysqli_query($conn, "select * from tblleaves where empid = '$session_id' AND Status = '$status' ") or die(mysqli_error());
+						$query_pend = mysqli_query($conn, "select * from tblleaves where empid = '$session_id' AND principal_status = '$status' ") or die(mysqli_error());
 						$count_pending = mysqli_num_rows($query_pend);
 						?>
 
@@ -162,7 +162,7 @@ if (isset($_GET['delete'])) {
 										<td><?php $stats = $result->Status;
 											if ($stats == 1) {
 											?>
-												<span style="color: green">Recommend</span>
+												<span style="color: green">Recommended</span>
 											<?php }
 											if ($stats == 2) { ?>
 												<span style="color: red">Not Recommend</span>
@@ -175,10 +175,10 @@ if (isset($_GET['delete'])) {
 										<td><?php $stats = $result->admin_status;
 											if ($stats == 1) {
 											?>
-												<span style="color: green">Approved</span>
+												<span style="color: green">Forwarded</span>
 											<?php }
 											if ($stats == 2) { ?>
-												<span style="color: red">Not Approved</span>
+												<span style="color: red">Rejected</span>
 											<?php }
 											if ($stats == 0) { ?>
 												<span style="color: blue">Pending</span>

@@ -320,10 +320,10 @@ if (isset($_POST['update'])) {
 												<?php $stats = $result->Status; ?>
 												<?php
 												if ($stats == 1) : ?>
-													<input type="text" style="color: green;" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo "Recommend"; ?>">
+													<input type="text" style="color: green;" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo "Recommended"; ?>">
 												<?php
 												elseif ($stats == 2) : ?>
-													<input type="text" style="color: red; font-size: 16px;" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo "Not Recommend"; ?>">
+													<input type="text" style="color: red; font-size: 16px;" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo "Not Recommended"; ?>">
 												<?php
 												else : ?>
 													<input type="text" style="color: blue;" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo "Pending"; ?>">
@@ -336,7 +336,7 @@ if (isset($_POST['update'])) {
 												<?php $ad_stats = $result->admin_status; ?>
 												<?php
 												if ($ad_stats == 1) : ?>
-													<input type="text" style="color: green;" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo "Forward"; ?>">
+													<input type="text" style="color: green;" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo "Forwarded"; ?>">
 												<?php
 												elseif ($ad_stats == 2) : ?>
 													<input type="text" style="color: red; font-size: 16px;" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo "Rejected"; ?>">

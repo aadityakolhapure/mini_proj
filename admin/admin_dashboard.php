@@ -297,10 +297,10 @@
 									<td><?php $stats = $row['Status'];
 										if ($stats == 1) {
 										?>
-											<span style="color: green">Recommend</span>
+											<span style="color: green">Recommended</span>
 										<?php }
 										if ($stats == 2) { ?>
-											<span style="color: red">Not Recommend</span>
+											<span style="color: red">Not Recommended</span>
 										<?php }
 										if ($stats == 0) { ?>
 											<span style="color: blue">Pending</span>
@@ -309,7 +309,7 @@
 									<td><?php $stats = $row['admin_status'];
 										if ($stats == 1) {
 										?>
-											<span style="color: green">Forward</span>
+											<span style="color: green">Forwarded</span>
 										<?php }
 										if ($stats == 2) { ?>
 											<span style="color: red">Rejected</span>
