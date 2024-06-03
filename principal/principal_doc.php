@@ -2,7 +2,7 @@
 <?php include('../includes/session.php') ?>
 
 <body>
-    <div class="pre-loader">
+    <!-- <div class="pre-loader">
         <div class="pre-loader-box">
         <div class="loader-logo"><img src="../vendors/images/favicon-32x32.png" alt="" style="height: 100px; width: 100px;"></div>
             <div class='loader-progress' id="progress_div">
@@ -13,7 +13,7 @@
                 Loading...
             </div>
         </div>
-    </div>
+    </div> -->
 
     <?php include('includes/navbar.php') ?>
     <?php include('includes/right_sidebar.php') ?>

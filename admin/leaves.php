@@ -7,7 +7,7 @@ include('../includes/session.php');
 <link rel="stylesheet" href="../js/css/style.css"> -->
 
 <body>
-	<div class="pre-loader">
+	<!-- <div class="pre-loader">
 		<div class="pre-loader-box">
 		<div class="loader-logo"><img src="../vendors/images/favicon-32x32.png" alt="" style="height: 100px; width: 100px;"></div>
 			<div class='loader-progress' id="progress_div">
@@ -19,7 +19,7 @@ include('../includes/session.php');
 			</div>
 		</div>
 	</div>
-
+ -->
 
 
 	<?php include('includes/navbar.php'); ?>

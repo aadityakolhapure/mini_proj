@@ -1,15 +1,17 @@
-<?php include('includes_hod/header.php'); include('../includes/session.php'); ?>
+<?php include('includes_hod/header.php');
+include('../includes/session.php'); ?>
+
 <body>
-  <div class="pre-loader">
+  <!-- <div class="pre-loader">
     <div class="pre-loader-box">
-    <div class="loader-logo"><img src="../vendors/images/favicon-32x32.png" alt="" style="height: 100px; width: 100px;"></div>
+      <div class="loader-logo"><img src="../vendors/images/favicon-32x32.png" alt="" style="height: 100px; width: 100px;"></div>
       <div class='loader-progress' id="progress_div">
         <div class='bar' id='bar1'></div>
       </div>
       <div class='percent' id='percent1'>0%</div>
       <div class="loading-text">Loading...</div>
     </div>
-  </div>
+  </div> -->
   <?php include('includes_hod/navbar.php'); ?>
   <?php include('includes_hod/right_sidebar.php'); ?>
   <?php include('includes_hod/left_sidebar.php'); ?>
@@ -36,8 +38,8 @@
           <h2 class="text-blue h4">REJECTED LEAVE HISTORY</h2>
         </div>
         <div class="col-md-5">
-					<input type="text" id="searchInput2" class="form-control" placeholder="Search....">
-				</div>
+          <input type="text" id="searchInput2" class="form-control" placeholder="Search....">
+        </div>
         <div class="pb-20">
           <table class="data-table table stripe hover nowrap" id="example">
             <thead>
@@ -85,17 +87,19 @@
     </div>
   </div>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script> -->
-		$(document).ready(function() {
-			$("#searchInput2").on("keyup", function() {
-				var value = $(this).val().toLowerCase();
-				$("#example tbody tr").filter(function() {
-					$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-				});
-			});
-		});
-	</script>
+  <script>
+    -- >
+    $(document).ready(function() {
+      $("#searchInput2").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#example tbody tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+  </script>
 
   <?php include('includes_hod/scripts.php') ?>
 </body>
+
 </html>
