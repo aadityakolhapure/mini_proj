@@ -3,6 +3,9 @@
 ## Overview
 
 The **Establishment Section Management System** is designed to modernize and streamline the administrative processes within educational institutions. This project focuses on two key modules: **Leave Application Management** and **Information and Document Management**. By digitizing these traditionally paper-intensive processes, the system enhances efficiency, transparency, and security, contributing to a more organized and effective administrative framework.
+<image src="Images/login.png" style="height: 400px; width: 800px; margin-top: 40px;">
+<image src="Images/dashboard.png" style="height: 400px; width: 800px; margin-top: 40px;">
+<image src="Images/list.png" style="height: 400px; width: 800px; margin-top: 40px;">
 
 ## Modules
 
@@ -17,6 +20,9 @@ The **Leave Application Management** module automates the process of submitting,
 - **Leave Balance Tracking:** The system maintains an up-to-date record of each faculty member's leave balance, accessible to both the individual and their supervisors.
 - **Comprehensive Reporting:** Detailed reports on leave trends, balances, and approvals aid in better workforce planning.
 - **Audit Trail:** All actions on leave requests are logged, providing a clear audit trail for future reference.
+  <image src="Images/leave_form.jpeg" style="height: 400px; width: 1000;">
+  <image src="Images/leave_from2.jpeg" style="height: 400px; width: 1000;">
+  <image src="Images/leave_application.jpeg" style="height: 400px; width: 1000;">
 
 ### 2. Information and Document Management
 
@@ -29,6 +35,7 @@ The **Information and Document Management** module centralizes the management of
 - **Data Integrity and Security:** Regular backups and robust security measures protect data integrity and prevent unauthorized access.
 - **Document Management:** Supports uploading, versioning, and managing documents to keep records up-to-date and organized.
 - **System Integration:** Integrates with other HR and payroll systems for seamless data flow and reduces duplicate data entry.
+  <image src="Images/document.png" style="height: 400px; width: 800px; margin-top: 40px;">
 
 ## Integration and Benefits
 
